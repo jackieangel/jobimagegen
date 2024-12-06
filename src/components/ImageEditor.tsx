@@ -32,20 +32,22 @@ export const ImageEditor = forwardRef<HTMLDivElement, ImageEditorProps>(
     },
     ref
   ) => {
-    const isDarkBackground = background.includes("Nightshade") || 
-                           background.includes("Cedar") ||
-                           background.includes("hsl(250, 25%, 10%)") ||
-                           background.startsWith("#") && 
-                           (
-                             parseInt(background.slice(1), 16) < 0x808080 || 
-                             background.length === 4 && parseInt(background.slice(1), 16) < 0x888
-                           );
+    const isDarkBackground = 
+      background.includes("Cedar") || 
+      background.includes("Nightshade") ||
+      background.toLowerCase().includes("linear-gradient") && (
+        background.includes("hsl(25, 50%, 20%)") || // Cedar
+        background.includes("hsl(250, 25%, 10%)") // Nightshade
+      );
 
     return (
       <div
         ref={ref}
         data-gradient-motion
-        className="w-full h-full relative"
+        className={cn(
+          "w-full h-full relative",
+          isDarkBackground && "dark"
+        )}
         style={{
           background,
         }}
@@ -66,7 +68,7 @@ export const ImageEditor = forwardRef<HTMLDivElement, ImageEditorProps>(
               jobTitleSize === "base" && "text-3xl",
               jobTitleSize === "lg" && "text-4xl",
               jobTitleSize === "xl" && "text-5xl",
-              isDarkBackground ? "text-white" : "text-gray-900",
+              isDarkBackground ? "text-primary-foreground" : "text-primary",
               "tracking-tight"
             )}
           >
@@ -78,11 +80,11 @@ export const ImageEditor = forwardRef<HTMLDivElement, ImageEditorProps>(
                 key={pill.id}
                 className={cn(
                   "px-4 py-1.5 rounded-full text-sm transition-colors duration-200 hover:bg-opacity-90 font-inter",
-                  isDarkBackground ? "text-white" : "text-gray-900"
+                  isDarkBackground ? "text-primary-foreground" : "text-primary"
                 )}
                 style={{
                   background: pill.background,
-                  color: isDarkBackground ? '#fff' : '#1a1a1a'
+                  color: isDarkBackground ? 'hsl(0 0% 98%)' : 'hsl(240 5.9% 10%)'
                 }}
               >
                 {pill.text}
