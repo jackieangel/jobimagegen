@@ -35,39 +35,13 @@ export function BackgroundControl({ background, setBackground }: BackgroundContr
     setBackground(currentGradient);
   };
 
-  const randomizeGradientStyle = () => {
+  const randomizeGradientAngle = () => {
     if (!background.includes("gradient")) return;
-
-    const currentGradient = gradients.find(g => g.value === background);
-    if (!currentGradient) return;
-
-    const styles = ["linear", "radial", "conic"];
-    const randomStyle = styles[Math.floor(Math.random() * styles.length)];
+    
     const angle = Math.floor(Math.random() * 360);
     setGradientAngle(angle.toString());
-    
-    const colors = currentGradient.value.match(/hsla?\([^)]+\)|#[A-Fa-f0-9]{6}/g) || [];
-    
-    if (colors.length >= 2) {
-      let newGradient = "";
-      
-      switch (randomStyle) {
-        case "linear":
-          newGradient = `linear-gradient(${angle}deg, ${colors[0]} 0%, ${colors[1]} 100%)`;
-          break;
-        case "radial":
-          const x = Math.floor(Math.random() * 100);
-          const y = Math.floor(Math.random() * 100);
-          newGradient = `radial-gradient(circle at ${x}% ${y}%, ${colors[0]} 0%, ${colors[1]} 100%)`;
-          break;
-        case "conic":
-          const rotation = Math.floor(Math.random() * 360);
-          newGradient = `conic-gradient(from ${rotation}deg at 50% 50%, ${colors[0]} 0%, ${colors[1]} 100%)`;
-          break;
-      }
-      
-      setBackground(newGradient);
-    }
+    const currentGradient = background.replace(/\d+deg/, `${angle}deg`);
+    setBackground(currentGradient);
   };
 
   const isValidHexColor = (color: string) => {
@@ -142,7 +116,7 @@ export function BackgroundControl({ background, setBackground }: BackgroundContr
                 <Button
                   variant="outline"
                   size="icon"
-                  onClick={randomizeGradientStyle}
+                  onClick={randomizeGradientAngle}
                   title="Randomize gradient angle"
                   className="shrink-0"
                 >
