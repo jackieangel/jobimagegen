@@ -1,11 +1,8 @@
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Switch } from "@/components/ui/switch";
-import { Shuffle, RotateCcw } from "lucide-react";
 import { useState, useEffect } from "react";
-import { Card } from "@/components/ui/card";
+import { GradientControls } from "./background/GradientControls";
+import { SolidColorControls } from "./background/SolidColorControls";
 
 interface BackgroundControlProps {
   background: string;
@@ -24,37 +21,6 @@ export function BackgroundControl({ background, setBackground }: BackgroundContr
     { name: "Mist", value: "linear-gradient(90deg, #EFF1F3 0%, #E2E6EA 100%)" },
     { name: "Nightshade", value: "linear-gradient(90deg, hsl(250, 25%, 10%) 0%, hsl(250, 25%, 13%) 100%)" },
   ];
-
-  useEffect(() => {
-    const editorElement = document.querySelector('[data-gradient-motion]');
-    if (editorElement) {
-      if (gradientMotion) {
-        editorElement.classList.add('gradient-motion');
-      } else {
-        editorElement.classList.remove('gradient-motion');
-      }
-    }
-  }, [gradientMotion]);
-
-  const updateGradientAngle = (angle: string) => {
-    if (!background.includes("gradient")) return;
-    
-    const newAngle = parseInt(angle);
-    if (isNaN(newAngle) || newAngle < 0 || newAngle > 360) return;
-    
-    setGradientAngle(angle);
-    const currentGradient = background.replace(/\d+deg/, `${newAngle}deg`);
-    setBackground(currentGradient);
-  };
-
-  const randomizeGradientAngle = () => {
-    if (!background.includes("gradient")) return;
-    
-    const angle = Math.floor(Math.random() * 360);
-    setGradientAngle(angle.toString());
-    const currentGradient = background.replace(/\d+deg/, `${angle}deg`);
-    setBackground(currentGradient);
-  };
 
   const isValidHexColor = (color: string) => {
     return /^#([A-Fa-f0-9]{3}){1,2}$/.test(color);
@@ -106,77 +72,20 @@ export function BackgroundControl({ background, setBackground }: BackgroundContr
         </div>
       </div>
 
-      {background.includes("gradient") && (
-        <Card className="p-4 space-y-4">
-          <div className="flex items-center gap-4">
-            <div className="flex-1 space-y-2">
-              <Label>Gradient Angle</Label>
-              <div className="flex items-center gap-2">
-                <div className="relative flex-1">
-                  <Input
-                    type="number"
-                    min="0"
-                    max="360"
-                    value={gradientAngle}
-                    onChange={(e) => updateGradientAngle(e.target.value)}
-                    className="pr-12"
-                  />
-                  <span className="absolute right-3 top-1/2 -translate-y-1/2 text-sm text-muted-foreground">
-                    deg
-                  </span>
-                </div>
-                <Button
-                  variant="outline"
-                  size="icon"
-                  onClick={() => updateGradientAngle("0")}
-                  title="Reset angle"
-                  className="shrink-0"
-                >
-                  <RotateCcw className="h-4 w-4" />
-                </Button>
-                <Button
-                  variant="outline"
-                  size="icon"
-                  onClick={randomizeGradientAngle}
-                  title="Randomize gradient angle"
-                  className="shrink-0"
-                >
-                  <Shuffle className="h-4 w-4" />
-                </Button>
-              </div>
-            </div>
-          </div>
-          <div className="flex items-center space-x-2">
-            <Switch
-              id="gradient-motion"
-              checked={gradientMotion}
-              onCheckedChange={setGradientMotion}
-            />
-            <Label htmlFor="gradient-motion">Enable gradient motion</Label>
-          </div>
-        </Card>
-      )}
-
-      {!background.includes("gradient") && (
-        <div className="space-y-2">
-          <Label htmlFor="background">Solid Color</Label>
-          <div className="flex gap-2">
-            <Input
-              id="background"
-              type="color"
-              value={background}
-              onChange={(e) => handleColorChange(e.target.value)}
-              className="w-12 h-12 p-1 cursor-pointer"
-            />
-            <Input
-              type="text"
-              value={background}
-              onChange={(e) => handleColorChange(e.target.value)}
-              className="font-mono"
-              placeholder="#000000"
-            />
-          </div>
-        </div>
+      {background.includes("gradient") ? (
+        <GradientControls
+          background={background}
+          setBackground={setBackground}
+          gradientAngle={gradientAngle}
+          setGradientAngle={setGradientAngle}
+          gradientMotion={gradientMotion}
+          setGradientMotion={setGradientMotion}
+        />
+      ) : (
+        <SolidColorControls
+          background={background}
+          handleColorChange={handleColorChange}
+        />
       )}
     </div>
   );
