@@ -25,8 +25,8 @@ export default function Index() {
     <Card className="min-h-[1000px] max-h-[1000px] max-w-[1400px] mx-auto bg-card dark">
       <div className="container h-full px-2 sm:px-4 py-4 sm:py-6 md:py-8">
         <header className="text-center mb-4 sm:mb-6 md:mb-8">
-          <h1 className="text-xl sm:text-2xl md:text-4xl font-archivo font-medium tracking-tight">
-            Generate a Job Post
+          <h1 className="text-xl sm:text-2xl md:text-4xl font-archivo font-medium tracking-tight lowercase">
+            generate a job post
           </h1>
         </header>
 
@@ -52,12 +52,9 @@ export default function Index() {
           </div>
 
           <div className="flex flex-col">
-            <Card className="p-3 sm:p-4 md:p-6 bg-accent flex-grow">
+            <Card className="p-3 sm:p-4 md:p-6 bg-accent flex-grow rounded-none">
               <div className="sticky top-0">
                 <div className="w-full flex flex-col items-center justify-center gap-4">
-                  <p className="text-sm text-muted-foreground">
-                    {template.width}:{template.height}
-                  </p>
                   <div className="w-full flex items-center justify-center">
                     <div className="relative w-[600px] h-[600px] bg-card shadow-sm flex items-center justify-center">
                       <div 
@@ -96,7 +93,7 @@ export default function Index() {
         </div>
 
         <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50">
-          <div className="bg-black/85 backdrop-blur-xl border border-white/10 rounded-full shadow-2xl p-3 flex items-center justify-center gap-3 max-w-fit mx-auto">
+          <div className="bg-black/85 backdrop-blur-xl border border-white/10 rounded-full shadow-2xl p-2 flex items-center justify-center gap-2 max-w-fit mx-auto">
             <ImageActions editorRef={editorRef} template={template} />
           </div>
         </div>

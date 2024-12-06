@@ -32,14 +32,8 @@ export function BackgroundControl({ background, setBackground }: BackgroundContr
     if (isNaN(newAngle)) return;
     
     setGradientAngle(angle);
-    const currentGradient = gradients.find(g => g.value.includes(background.split("linear-gradient")[1].split(",")[1]));
-    if (!currentGradient) return;
-    
-    const newGradient = currentGradient.value.replace(
-      /linear-gradient\(\d+deg/,
-      `linear-gradient(${newAngle}deg`
-    );
-    setBackground(newGradient);
+    const currentGradient = background.replace(/\d+deg/, `${newAngle}deg`);
+    setBackground(currentGradient);
   };
 
   const randomizeGradientStyle = () => {
