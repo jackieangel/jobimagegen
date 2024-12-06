@@ -22,7 +22,7 @@ export function JobTitleControl({
     <div className="space-y-4">
       <div className="flex items-center justify-between">
         <Label className="flex items-center gap-2">
-          Job Details
+          Job
         </Label>
       </div>
 

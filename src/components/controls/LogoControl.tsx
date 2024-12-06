@@ -19,7 +19,7 @@ export function LogoControl({ setLogo }: LogoControlProps) {
 
   return (
     <div className="space-y-2">
-      <Label htmlFor="logo">Company Logo</Label>
+      <Label htmlFor="logo">Logo</Label>
       <Input
         id="logo"
         type="file"
