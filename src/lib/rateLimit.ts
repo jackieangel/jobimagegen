@@ -1,7 +1,7 @@
-import { createClient, LemonSqueezy } from '@lemonsqueezy/lemonsqueezy.js';
+import { lemonSqueezySetup } from '@lemonsqueezy/lemonsqueezy.js';
 
 // Initialize Lemon Squeezy with your API key
-const ls: LemonSqueezy = createClient('YOUR_API_KEY');
+lemonSqueezySetup({ apiKey: 'YOUR_API_KEY' });
 
 interface ExportLog {
   lastExport: number;
@@ -20,8 +20,15 @@ export const checkExportLimit = async (): Promise<boolean> => {
     }
 
     // Validate license with Lemon Squeezy
-    const response = await ls.getLicenseKey(licenseKey);
-    if (response.statusCode !== 200 || response.error) {
+    const response = await fetch(`https://api.lemonsqueezy.com/v1/licenses/${licenseKey}/validate`, {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+    });
+    
+    const data = await response.json();
+    if (!response.ok || !data.valid) {
       throw new Error('Invalid license');
     }
 
