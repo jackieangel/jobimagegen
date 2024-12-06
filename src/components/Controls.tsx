@@ -81,6 +81,7 @@ export function Controls({
         <TagsControl
           pills={pills}
           setPills={setPills}
+          background={background}
         />
       </div>
     </Card>

@@ -16,9 +16,10 @@ interface Pill {
 interface TagsControlProps {
   pills: Pill[];
   setPills: (pills: Pill[]) => void;
+  background: string; // Add background prop
 }
 
-const backgroundOptions = [
+const lightThemeColors = [
   { label: "Light Gray", value: "rgba(243, 244, 246, 0.8)" },
   { label: "Light Blue", value: "rgba(224, 242, 254, 0.8)" },
   { label: "Light Green", value: "rgba(220, 252, 231, 0.8)" },
@@ -26,7 +27,27 @@ const backgroundOptions = [
   { label: "Light Pink", value: "rgba(252, 231, 243, 0.8)" },
 ];
 
-export function TagsControl({ pills, setPills }: TagsControlProps) {
+const darkThemeColors = [
+  { label: "Dark Gray", value: "rgba(255, 255, 255, 0.15)" },
+  { label: "Dark Blue", value: "rgba(255, 255, 255, 0.2)" },
+  { label: "Dark Purple", value: "rgba(255, 255, 255, 0.25)" },
+];
+
+const defaultLightThemeColor = "rgba(243, 244, 246, 0.8)"; // Light Gray
+const defaultDarkThemeColor = "rgba(255, 255, 255, 0.15)"; // Dark Gray
+
+export function TagsControl({ pills, setPills, background }: TagsControlProps) {
+  const isDarkTheme = 
+    background.includes("Cedar") || 
+    background.includes("Nightshade") ||
+    background.toLowerCase().includes("linear-gradient") && (
+      background.includes("hsl(25, 50%, 20%)") || // Cedar
+      background.includes("hsl(250, 25%, 10%)") // Nightshade
+    );
+
+  const backgroundOptions = isDarkTheme ? darkThemeColors : lightThemeColors;
+  const defaultTagColor = isDarkTheme ? defaultDarkThemeColor : defaultLightThemeColor;
+
   const addPill = () => {
     if (pills.length >= 4) {
       toast.error("Maximum of 4 tags allowed");
@@ -36,7 +57,7 @@ export function TagsControl({ pills, setPills }: TagsControlProps) {
       id: Date.now(), 
       text: "New Tag", 
       font: "Inter", 
-      background: "rgba(243, 244, 246, 0.8)" // Set default to Light Gray
+      background: defaultTagColor
     }]);
   };
 
