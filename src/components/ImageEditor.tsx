@@ -50,13 +50,15 @@ export const ImageEditor = forwardRef<HTMLDivElement, ImageEditorProps>(
       return isDarkTheme ? "hsl(0 0% 98%)" : "hsl(240 5.9% 10%)";
     };
 
+    const isGradient = background.toLowerCase().includes("linear-gradient");
+
     return (
       <div
         ref={ref}
-        data-gradient-motion
         className={cn(
           "w-full h-full relative",
-          isDarkTheme && "dark"
+          isDarkTheme && "dark",
+          isGradient && "preview-gradient-motion"
         )}
         style={{
           background,

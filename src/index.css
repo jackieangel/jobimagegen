@@ -90,8 +90,8 @@
     }
   }
 
-  .gradient-motion {
-    animation: gradientMotion 180s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  .preview-gradient-motion {
+    animation: gradientMotion 15s ease infinite;
     background-size: 200% 200%;
   }
 }
