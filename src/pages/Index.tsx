@@ -19,7 +19,17 @@ export default function Index() {
   const [logo, setLogo] = useState<string | null>(null);
 
   const editorRef = useRef<HTMLDivElement>(null);
+  const actionBarRef = useRef<HTMLDivElement>(null);
   const template = templates[activeTemplate];
+
+  const triggerShake = () => {
+    if (actionBarRef.current) {
+      actionBarRef.current.classList.add('shake');
+      setTimeout(() => {
+        actionBarRef.current?.classList.remove('shake');
+      }, 500);
+    }
+  };
 
   return (
     <Card className="min-h-[1000px] max-h-[1000px] max-w-[1400px] mx-auto bg-card dark">
@@ -86,9 +96,9 @@ export default function Index() {
           </div>
         </div>
 
-        <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50">
+        <div ref={actionBarRef} className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50">
           <div className="bg-black/85 backdrop-blur-xl border border-white/10 rounded-full shadow-2xl p-2 flex items-center justify-center gap-2 max-w-fit mx-auto">
-            <ImageActions editorRef={editorRef} template={template} />
+            <ImageActions editorRef={editorRef} onRateLimit={triggerShake} template={template} />
           </div>
         </div>
       </div>

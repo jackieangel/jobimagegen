@@ -16,27 +16,17 @@ import {
 interface ImageActionsProps {
   editorRef: React.RefObject<HTMLDivElement>;
   template: Template;
+  onRateLimit: () => void;
 }
 
-export function ImageActions({ editorRef, template }: ImageActionsProps) {
-  const actionsRef = useRef<HTMLDivElement>(null);
-
-  const triggerShake = () => {
-    if (actionsRef.current) {
-      actionsRef.current.classList.add('shake');
-      setTimeout(() => {
-        actionsRef.current?.classList.remove('shake');
-      }, 500);
-    }
-  };
-
+export function ImageActions({ editorRef, template, onRateLimit }: ImageActionsProps) {
   const handleExport = async (type: 'png' | 'gif') => {
     if (!editorRef.current) return;
 
     try {
       const canExport = await checkExportLimit();
       if (!canExport) {
-        triggerShake();
+        onRateLimit();
         toast.error("You've reached your export limit.");
         return;
       }
@@ -97,7 +87,7 @@ export function ImageActions({ editorRef, template }: ImageActionsProps) {
     try {
       const canExport = await checkExportLimit();
       if (!canExport) {
-        triggerShake();
+        onRateLimit();
         toast.error("You've reached your sharing limit.");
         return;
       }
@@ -171,7 +161,7 @@ export function ImageActions({ editorRef, template }: ImageActionsProps) {
   const hasMotion = editorRef.current?.querySelector('.gradient-motion');
 
   return (
-    <div ref={actionsRef}>
+    <>
       {hasMotion ? (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -240,6 +230,6 @@ export function ImageActions({ editorRef, template }: ImageActionsProps) {
         <Key className="w-4 h-4 mr-1.5" />
         Get License
       </Button>
-    </div>
+    </>
   );
 }
