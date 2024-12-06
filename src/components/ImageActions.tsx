@@ -71,28 +71,30 @@ export function ImageActions({ editorRef, template }: ImageActionsProps) {
   };
 
   return (
-    <div className="sticky bottom-0 mt-4 p-4 bg-background border-t flex justify-center gap-4">
-      <Button onClick={handleExport} className="w-full sm:w-auto" size="lg">
+    <>
+      <Button 
+        onClick={handleExport} 
+        className="rounded-full bg-primary/90 hover:bg-primary/95 text-primary-foreground shadow-sm"
+        size="sm"
+      >
         <Download className="w-4 h-4 mr-2" />
-        Export Image
+        Export
       </Button>
 
       {template.name === 'instagram-story' ? (
         <Button
           onClick={handleShare}
-          className="w-full sm:w-auto"
-          size="lg"
-          variant="outline"
+          className="rounded-full bg-primary/90 hover:bg-primary/95 text-primary-foreground shadow-sm"
+          size="sm"
         >
           <Instagram className="w-4 h-4 mr-2" />
-          Share to Instagram Story
+          Share to Instagram
         </Button>
       ) : template.name === 'linkedin-post' ? (
         <Button
           onClick={handleShare}
-          className="w-full sm:w-auto"
-          size="lg"
-          variant="outline"
+          className="rounded-full bg-primary/90 hover:bg-primary/95 text-primary-foreground shadow-sm"
+          size="sm"
         >
           <Linkedin className="w-4 h-4 mr-2" />
           Share to LinkedIn
@@ -100,14 +102,13 @@ export function ImageActions({ editorRef, template }: ImageActionsProps) {
       ) : (
         <Button
           onClick={handleShare}
-          className="w-full sm:w-auto"
-          size="lg"
-          variant="outline"
+          className="rounded-full bg-primary/90 hover:bg-primary/95 text-primary-foreground shadow-sm"
+          size="sm"
         >
           <Share2 className="w-4 h-4 mr-2" />
-          Share Image
+          Share
         </Button>
       )}
-    </div>
+    </>
   );
 }

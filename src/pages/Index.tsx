@@ -8,7 +8,7 @@ import { Card } from "@/components/ui/card";
 
 export default function Index() {
   const [activeTemplate, setActiveTemplate] = useState("instagram-post");
-  const [background, setBackground] = useState("#f5f5f5");
+  const [background, setBackground] = useState("linear-gradient(90deg, #E3E6E3 0%, #CBD5CD 100%)");
   const [jobTitle, setJobTitle] = useState("Design Chief of Staff");
   const [jobTitleFont, setJobTitleFont] = useState("Playfair Display");
   const [jobTitleSize, setJobTitleSize] = useState("4xl");
@@ -99,8 +99,8 @@ export default function Index() {
           </div>
         </div>
 
-        <div className="sticky bottom-0 left-0 right-0 w-full bg-background/80 backdrop-blur-sm border-t mt-4">
-          <div className="container max-w-[1400px] mx-auto">
+        <div className="fixed bottom-6 left-1/2 -translate-x-1/2 w-[calc(100%-3rem)] max-w-[600px]">
+          <div className="bg-background/95 backdrop-blur-lg border rounded-full shadow-lg p-3 flex items-center justify-center gap-3">
             <ImageActions editorRef={editorRef} template={template} />
           </div>
         </div>
