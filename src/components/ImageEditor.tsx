@@ -41,7 +41,7 @@ export const ImageEditor = forwardRef<HTMLDivElement, ImageEditorProps>(
       );
 
     useEffect(() => {
-      const editorElement = document.querySelector('[data-gradient-motion]');
+      const editorElement = document.querySelector('[data-gradient-motion]') as HTMLElement;
       if (editorElement && background.includes('linear-gradient')) {
         const angle = background.match(/\d+deg/)?.[0] || '90deg';
         const colors = background.match(/hsla?\([^)]+\)|#[A-Fa-f0-9]{6}|#[A-Fa-f0-9]{3}/g) || [];
