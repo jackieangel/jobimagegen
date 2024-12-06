@@ -22,7 +22,7 @@ export default function Index() {
   const template = templates[activeTemplate];
 
   return (
-    <Card className="min-h-[1000px] max-h-[1000px] max-w-[1400px] mx-auto bg-card">
+    <Card className="min-h-[1000px] max-h-[1000px] max-w-[1400px] mx-auto bg-card dark">
       <div className="container h-full px-2 sm:px-4 py-4 sm:py-6 md:py-8">
         <header className="text-center space-y-2 sm:space-y-3 mb-4 sm:mb-6 md:mb-8">
           <h1 className="text-xl sm:text-2xl md:text-4xl font-archivo font-medium tracking-tight">
@@ -99,8 +99,8 @@ export default function Index() {
           </div>
         </div>
 
-        <div className="fixed bottom-6 left-1/2 -translate-x-1/2 w-[calc(100%-3rem)] max-w-[600px] z-50">
-          <div className="bg-black/75 backdrop-blur-xl border border-white/10 rounded-full shadow-2xl p-3 flex items-center justify-center gap-3">
+        <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50">
+          <div className="bg-black/85 backdrop-blur-xl border border-white/10 rounded-full shadow-2xl p-3 flex items-center justify-center gap-3 max-w-fit mx-auto">
             <ImageActions editorRef={editorRef} template={template} />
           </div>
         </div>

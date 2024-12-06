@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Switch } from "@/components/ui/switch";
 import { Shuffle } from "lucide-react";
 import { useState } from "react";
 
@@ -12,6 +13,7 @@ interface BackgroundControlProps {
 
 export function BackgroundControl({ background, setBackground }: BackgroundControlProps) {
   const [gradientAngle, setGradientAngle] = useState("90");
+  const [gradientMotion, setGradientMotion] = useState(false);
   
   const gradients = [
     { name: "None (Solid Color)", value: "none" },
@@ -75,7 +77,7 @@ export function BackgroundControl({ background, setBackground }: BackgroundContr
   };
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-4 dark">
       <div className="space-y-2">
         <Label>Background Style</Label>
         <div className="flex gap-2">
@@ -94,34 +96,45 @@ export function BackgroundControl({ background, setBackground }: BackgroundContr
               ))}
             </SelectContent>
           </Select>
-          {background !== "none" && background.includes("gradient") && (
-            <Button
-              variant="outline"
-              size="icon"
-              onClick={randomizeGradientStyle}
-              title="Randomize gradient style"
-            >
-              <Shuffle className="h-4 w-4" />
-            </Button>
-          )}
         </div>
       </div>
 
       {background !== "none" && background.includes("gradient") && (
-        <div className="space-y-2">
-          <Label>Gradient Angle</Label>
-          <div className="flex gap-2">
-            <Input
-              type="number"
-              min="0"
-              max="360"
-              value={gradientAngle}
-              onChange={(e) => updateGradientAngle(e.target.value)}
-              className="w-24"
-            />
-            <span className="text-sm text-muted-foreground flex items-center">degrees</span>
+        <>
+          <div className="flex items-center gap-4">
+            <div className="flex-1 space-y-2">
+              <Label>Gradient Angle</Label>
+              <div className="flex gap-2">
+                <Input
+                  type="number"
+                  min="0"
+                  max="360"
+                  value={gradientAngle}
+                  onChange={(e) => updateGradientAngle(e.target.value)}
+                  className="w-24"
+                />
+                <span className="text-sm text-muted-foreground flex items-center">degrees</span>
+                <Button
+                  variant="outline"
+                  size="icon"
+                  onClick={randomizeGradientStyle}
+                  title="Randomize gradient style"
+                  className="ml-auto"
+                >
+                  <Shuffle className="h-4 w-4" />
+                </Button>
+              </div>
+            </div>
           </div>
-        </div>
+          <div className="flex items-center space-x-2">
+            <Switch
+              id="gradient-motion"
+              checked={gradientMotion}
+              onCheckedChange={setGradientMotion}
+            />
+            <Label htmlFor="gradient-motion">Enable gradient motion</Label>
+          </div>
+        </>
       )}
 
       {background === "none" && (

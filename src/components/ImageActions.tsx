@@ -74,38 +74,38 @@ export function ImageActions({ editorRef, template }: ImageActionsProps) {
     <>
       <Button 
         onClick={handleExport} 
-        className="rounded-full bg-primary/90 hover:bg-primary/95 text-primary-foreground shadow-sm"
+        className="rounded-full bg-primary/90 hover:bg-primary/95 text-primary-foreground shadow-sm px-3"
         size="sm"
       >
-        <Download className="w-4 h-4 mr-2" />
+        <Download className="w-4 h-4 mr-1.5" />
         Export
       </Button>
 
       {template.name === 'instagram-story' ? (
         <Button
           onClick={handleShare}
-          className="rounded-full bg-primary/90 hover:bg-primary/95 text-primary-foreground shadow-sm"
+          className="rounded-full bg-primary/90 hover:bg-primary/95 text-primary-foreground shadow-sm px-3"
           size="sm"
         >
-          <Instagram className="w-4 h-4 mr-2" />
-          Share to Instagram
+          <Instagram className="w-4 h-4 mr-1.5" />
+          Post on Instagram
         </Button>
       ) : template.name === 'linkedin-post' ? (
         <Button
           onClick={handleShare}
-          className="rounded-full bg-primary/90 hover:bg-primary/95 text-primary-foreground shadow-sm"
+          className="rounded-full bg-primary/90 hover:bg-primary/95 text-primary-foreground shadow-sm px-3"
           size="sm"
         >
-          <Linkedin className="w-4 h-4 mr-2" />
-          Share to LinkedIn
+          <Linkedin className="w-4 h-4 mr-1.5" />
+          Post on LinkedIn
         </Button>
       ) : (
         <Button
           onClick={handleShare}
-          className="rounded-full bg-primary/90 hover:bg-primary/95 text-primary-foreground shadow-sm"
+          className="rounded-full bg-primary/90 hover:bg-primary/95 text-primary-foreground shadow-sm px-3"
           size="sm"
         >
-          <Share2 className="w-4 h-4 mr-2" />
+          <Share2 className="w-4 h-4 mr-1.5" />
           Share
         </Button>
       )}
