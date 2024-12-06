@@ -25,9 +25,27 @@ export function BackgroundControl({ background, setBackground }: BackgroundContr
     const currentGradient = gradients.find(g => g.value === background);
     if (!currentGradient) return;
 
+    // Generate random values for a more diverse gradient
     const angle = Math.floor(Math.random() * 360);
-    const newGradient = currentGradient.value.replace(/\d+deg/, `${angle}deg`);
-    setBackground(newGradient);
+    const gradientType = Math.random() < 0.7 ? 'linear' : 'radial';
+    
+    if (gradientType === 'linear') {
+      const newGradient = currentGradient.value.replace(
+        /linear-gradient\(\d+deg/,
+        `linear-gradient(${angle}deg`
+      );
+      setBackground(newGradient);
+    } else {
+      // Create a radial gradient with random position
+      const x = Math.floor(Math.random() * 100);
+      const y = Math.floor(Math.random() * 100);
+      const colors = currentGradient.value.match(/hsla?\([^)]+\)/g) || [];
+      if (colors.length >= 2) {
+        setBackground(
+          `radial-gradient(circle at ${x}% ${y}%, ${colors[0]} 0%, ${colors[1]} 100%)`
+        );
+      }
+    }
   };
 
   return (
@@ -50,7 +68,7 @@ export function BackgroundControl({ background, setBackground }: BackgroundContr
               ))}
             </SelectContent>
           </Select>
-          {background !== "none" && background.includes("linear-gradient") && (
+          {background !== "none" && background.includes("gradient") && (
             <Button
               variant="outline"
               size="icon"

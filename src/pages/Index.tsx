@@ -96,7 +96,11 @@ export default function Index() {
                 </div>
               </div>
             </Card>
+          </div>
+        </div>
 
+        <div className="sticky bottom-0 left-0 right-0 w-full bg-background/80 backdrop-blur-sm border-t mt-4">
+          <div className="container max-w-[1400px] mx-auto">
             <ImageActions editorRef={editorRef} template={template} />
           </div>
         </div>
