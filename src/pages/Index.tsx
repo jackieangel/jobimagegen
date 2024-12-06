@@ -55,7 +55,7 @@ export default function Index() {
           </div>
 
           <Card className="p-3 sm:p-4 md:p-6 bg-accent">
-            <div className={`sticky ${activeTemplate === 'linkedin-post' ? 'top-0' : 'top-1/2 -translate-y-1/2'}`}>
+            <div className="sticky top-0">
               <div className="w-full flex flex-col items-center justify-center gap-4">
                 <p className="text-sm text-muted-foreground">
                   Template Aspect Ratio: {aspectRatio}
@@ -71,6 +71,11 @@ export default function Index() {
                         height: template.height > template.width 
                           ? '600px' 
                           : `${(template.height / template.width) * 600}px`,
+                        top: activeTemplate === 'linkedin-post' ? '0' : '50%',
+                        left: '50%',
+                        transform: activeTemplate === 'linkedin-post' 
+                          ? 'translateX(-50%)' 
+                          : 'translate(-50%, -50%)',
                       }}
                     >
                       <ImageEditor
