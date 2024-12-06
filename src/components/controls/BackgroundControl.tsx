@@ -3,6 +3,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Shuffle } from "lucide-react";
+import { useState } from "react";
 
 interface BackgroundControlProps {
   background: string;
@@ -10,6 +11,8 @@ interface BackgroundControlProps {
 }
 
 export function BackgroundControl({ background, setBackground }: BackgroundControlProps) {
+  const [gradientAngle, setGradientAngle] = useState("90");
+  
   const gradients = [
     { name: "None (Solid Color)", value: "none" },
     { name: "Ocean", value: "linear-gradient(90deg, hsla(186, 33%, 94%, 1) 0%, hsla(216, 41%, 79%, 1) 100%)" },
@@ -19,32 +22,55 @@ export function BackgroundControl({ background, setBackground }: BackgroundContr
     { name: "Mist", value: "linear-gradient(90deg, #EFF1F3 0%, #E2E6EA 100%)" },
   ];
 
-  const randomizeGradientDirection = () => {
-    if (background === "none" || !background.includes("linear-gradient")) return;
+  const updateGradientAngle = (angle: string) => {
+    if (background === "none" || !background.includes("gradient")) return;
+    
+    const newAngle = parseInt(angle);
+    if (isNaN(newAngle)) return;
+    
+    setGradientAngle(angle);
+    const currentGradient = gradients.find(g => g.value.includes(background.split("linear-gradient")[1].split(",")[1]));
+    if (!currentGradient) return;
+    
+    const newGradient = currentGradient.value.replace(
+      /linear-gradient\(\d+deg/,
+      `linear-gradient(${newAngle}deg`
+    );
+    setBackground(newGradient);
+  };
+
+  const randomizeGradientStyle = () => {
+    if (background === "none" || !background.includes("gradient")) return;
 
     const currentGradient = gradients.find(g => g.value === background);
     if (!currentGradient) return;
 
-    // Generate random values for a more diverse gradient
+    const styles = ["linear", "radial", "conic"];
+    const randomStyle = styles[Math.floor(Math.random() * styles.length)];
     const angle = Math.floor(Math.random() * 360);
-    const gradientType = Math.random() < 0.7 ? 'linear' : 'radial';
+    setGradientAngle(angle.toString());
     
-    if (gradientType === 'linear') {
-      const newGradient = currentGradient.value.replace(
-        /linear-gradient\(\d+deg/,
-        `linear-gradient(${angle}deg`
-      );
-      setBackground(newGradient);
-    } else {
-      // Create a radial gradient with random position
-      const x = Math.floor(Math.random() * 100);
-      const y = Math.floor(Math.random() * 100);
-      const colors = currentGradient.value.match(/hsla?\([^)]+\)/g) || [];
-      if (colors.length >= 2) {
-        setBackground(
-          `radial-gradient(circle at ${x}% ${y}%, ${colors[0]} 0%, ${colors[1]} 100%)`
-        );
+    const colors = currentGradient.value.match(/hsla?\([^)]+\)|#[A-Fa-f0-9]{6}/g) || [];
+    
+    if (colors.length >= 2) {
+      let newGradient = "";
+      
+      switch (randomStyle) {
+        case "linear":
+          newGradient = `linear-gradient(${angle}deg, ${colors[0]} 0%, ${colors[1]} 100%)`;
+          break;
+        case "radial":
+          const x = Math.floor(Math.random() * 100);
+          const y = Math.floor(Math.random() * 100);
+          newGradient = `radial-gradient(circle at ${x}% ${y}%, ${colors[0]} 0%, ${colors[1]} 100%)`;
+          break;
+        case "conic":
+          const rotation = Math.floor(Math.random() * 360);
+          newGradient = `conic-gradient(from ${rotation}deg at 50% 50%, ${colors[0]} 0%, ${colors[1]} 100%)`;
+          break;
       }
+      
+      setBackground(newGradient);
     }
   };
 
@@ -54,7 +80,7 @@ export function BackgroundControl({ background, setBackground }: BackgroundContr
         <Label>Background Style</Label>
         <div className="flex gap-2">
           <Select 
-            value={background === "" ? "none" : background} 
+            value={background === "" ? "none" : background}
             onValueChange={setBackground}
           >
             <SelectTrigger className="flex-1">
@@ -72,14 +98,31 @@ export function BackgroundControl({ background, setBackground }: BackgroundContr
             <Button
               variant="outline"
               size="icon"
-              onClick={randomizeGradientDirection}
-              title="Randomize gradient direction"
+              onClick={randomizeGradientStyle}
+              title="Randomize gradient style"
             >
               <Shuffle className="h-4 w-4" />
             </Button>
           )}
         </div>
       </div>
+
+      {background !== "none" && background.includes("gradient") && (
+        <div className="space-y-2">
+          <Label>Gradient Angle</Label>
+          <div className="flex gap-2">
+            <Input
+              type="number"
+              min="0"
+              max="360"
+              value={gradientAngle}
+              onChange={(e) => updateGradientAngle(e.target.value)}
+              className="w-24"
+            />
+            <span className="text-sm text-muted-foreground flex items-center">degrees</span>
+          </div>
+        </div>
+      )}
 
       {background === "none" && (
         <div className="space-y-2">
