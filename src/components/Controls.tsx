@@ -46,6 +46,12 @@ export function Controls({
 }: ControlsProps) {
   return (
     <Card className="p-6 space-y-6 h-[calc(100vh-12rem)] overflow-y-auto rounded-none border-border/50">
+      <div className="sticky top-0 bg-card z-10 pb-4 -mt-2 -mx-2 px-2 pt-2">
+        <h1 className="text-xl sm:text-2xl md:text-4xl font-archivo font-medium tracking-tight lowercase">
+          generate a job post
+        </h1>
+      </div>
+
       <div className="space-y-8">
         <TemplateControl
           activeTemplate={activeTemplate}

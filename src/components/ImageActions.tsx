@@ -20,7 +20,7 @@ export function ImageActions({ editorRef, template }: ImageActionsProps) {
       // Check export limit
       const canExport = await checkExportLimit();
       if (!canExport) {
-        toast.error("You've reached your weekly export limit. Please upgrade your license to continue.");
+        toast.error("You've reached your export limit. Please upgrade your license to continue.");
         return;
       }
 
@@ -84,7 +84,7 @@ export function ImageActions({ editorRef, template }: ImageActionsProps) {
       // Check export limit
       const canExport = await checkExportLimit();
       if (!canExport) {
-        toast.error("You've reached your weekly sharing limit. Please upgrade your license to continue.");
+        toast.error("You've reached your sharing limit. Please upgrade your license to continue.");
         return;
       }
 
