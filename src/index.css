@@ -82,8 +82,14 @@
     0% {
       background-position: 0% 50%;
     }
-    50% {
+    25% {
       background-position: 100% 50%;
+    }
+    50% {
+      background-position: 50% 100%;
+    }
+    75% {
+      background-position: 0% 50%;
     }
     100% {
       background-position: 0% 50%;
@@ -91,7 +97,7 @@
   }
 
   .preview-gradient-motion {
-    animation: gradientMotion 15s ease infinite;
-    background-size: 200% 200%;
+    animation: gradientMotion 8s ease infinite;
+    background-size: 400% 400%;
   }
 }
