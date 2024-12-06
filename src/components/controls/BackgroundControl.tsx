@@ -22,6 +22,7 @@ export function BackgroundControl({ background, setBackground }: BackgroundContr
     { name: "Dusk", value: "linear-gradient(90deg, #F6F4F8 0%, #E2DDE7 100%)" },
     { name: "Sand", value: "linear-gradient(90deg, #F5F3F0 0%, #E8E2D9 100%)" },
     { name: "Mist", value: "linear-gradient(90deg, #EFF1F3 0%, #E2E6EA 100%)" },
+    { name: "Nightshade", value: "linear-gradient(90deg, hsl(250, 25%, 10%) 0%, hsl(250, 25%, 13%) 100%)" },
   ];
 
   useEffect(() => {
