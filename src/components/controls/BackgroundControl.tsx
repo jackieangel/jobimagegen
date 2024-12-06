@@ -143,7 +143,7 @@ export function BackgroundControl({ background, setBackground }: BackgroundContr
                   variant="outline"
                   size="icon"
                   onClick={randomizeGradientStyle}
-                  title="Randomize gradient style"
+                  title="Randomize gradient angle"
                   className="shrink-0"
                 >
                   <Shuffle className="h-4 w-4" />
