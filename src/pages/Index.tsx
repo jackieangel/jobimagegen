@@ -10,30 +10,34 @@ export default function Index() {
   const [activeTemplate, setActiveTemplate] = useState("instagram-post");
   const [background, setBackground] = useState("#E5F0FF");
   const [jobTitle, setJobTitle] = useState("Design Chief of Staff");
-  const [location, setLocation] = useState("PARIS / REMOTE");
-  const [category, setCategory] = useState("UX/UI DESIGN");
+  const [jobTitleFont, setJobTitleFont] = useState("Playfair Display");
+  const [jobTitleSize, setJobTitleSize] = useState("4xl");
+  const [pills, setPills] = useState([
+    { id: 1, text: "PARIS / REMOTE", font: "Inter" },
+    { id: 2, text: "UX/UI DESIGN", font: "Inter" },
+  ]);
   const [logo, setLogo] = useState<string | null>(null);
 
   return (
-    <div className="min-h-screen p-6 bg-gradient-to-b from-blue-50 to-white">
-      <div className="max-w-7xl mx-auto space-y-8 animate-fade-in">
-        <header className="text-center space-y-4">
-          <h1 className="text-4xl font-playfair font-semibold text-slate-800">
+    <div className="min-h-screen p-4 sm:p-6 bg-gradient-to-b from-blue-50 to-white">
+      <div className="max-w-[1400px] mx-auto space-y-6 animate-fade-in">
+        <header className="text-center space-y-3">
+          <h1 className="text-3xl sm:text-4xl font-playfair font-semibold text-slate-800">
             Job Post Image Generator
           </h1>
-          <p className="text-slate-600 max-w-2xl mx-auto">
+          <p className="text-sm sm:text-base text-slate-600 max-w-2xl mx-auto">
             Create beautiful job posting images for social media in seconds. Choose your template,
             customize your design, and export your image.
           </p>
         </header>
 
-        <Tabs defaultValue="instagram-post" className="space-y-8">
-          <TabsList className="grid w-full max-w-2xl mx-auto grid-cols-3 h-auto p-1">
+        <Tabs defaultValue="instagram-post" className="space-y-6">
+          <TabsList className="grid w-full max-w-md mx-auto grid-cols-3 h-auto p-1">
             {Object.entries(templates).map(([key, template]) => (
               <TabsTrigger
                 key={key}
                 value={key}
-                className="py-2 data-[state=active]:bg-white"
+                className="py-2 data-[state=active]:bg-white text-sm"
                 onClick={() => setActiveTemplate(key)}
               >
                 {template.name}
@@ -41,14 +45,15 @@ export default function Index() {
             ))}
           </TabsList>
 
-          <div className="grid md:grid-cols-[1fr,400px] gap-8">
-            <Card className="p-6 flex items-center justify-center bg-white/50 backdrop-blur-sm">
+          <div className="grid lg:grid-cols-[1fr,380px] gap-6">
+            <Card className="p-4 sm:p-6 flex items-center justify-center bg-white/50 backdrop-blur-sm">
               <ImageEditor
                 template={templates[activeTemplate]}
                 background={background}
                 jobTitle={jobTitle}
-                location={location}
-                category={category}
+                jobTitleFont={jobTitleFont}
+                jobTitleSize={jobTitleSize}
+                pills={pills}
                 logo={logo}
               />
             </Card>
@@ -58,10 +63,12 @@ export default function Index() {
               setBackground={setBackground}
               jobTitle={jobTitle}
               setJobTitle={setJobTitle}
-              location={location}
-              setLocation={setLocation}
-              category={category}
-              setCategory={setCategory}
+              jobTitleFont={jobTitleFont}
+              setJobTitleFont={setJobTitleFont}
+              jobTitleSize={jobTitleSize}
+              setJobTitleSize={setJobTitleSize}
+              pills={pills}
+              setPills={setPills}
               setLogo={setLogo}
             />
           </div>

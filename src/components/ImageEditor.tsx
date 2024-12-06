@@ -6,12 +6,19 @@ import { Download } from "lucide-react";
 import { toast } from "sonner";
 import type { Template } from "@/lib/templates";
 
+interface Pill {
+  id: number;
+  text: string;
+  font: string;
+}
+
 interface ImageEditorProps {
   template: Template;
   background: string;
   jobTitle: string;
-  location: string;
-  category: string;
+  jobTitleFont: string;
+  jobTitleSize: string;
+  pills: Pill[];
   logo: string | null;
 }
 
@@ -19,8 +26,9 @@ export function ImageEditor({
   template,
   background,
   jobTitle,
-  location,
-  category,
+  jobTitleFont,
+  jobTitleSize,
+  pills,
   logo,
 }: ImageEditorProps) {
   const editorRef = useRef<HTMLDivElement>(null);
@@ -71,17 +79,23 @@ export function ImageEditor({
           
           <Draggable bounds="parent">
             <div className="cursor-move space-y-6">
-              <h1 className="text-4xl md:text-5xl font-playfair font-medium text-slate-800 leading-tight">
+              <h1 
+                className={`text-${jobTitleSize} font-medium text-slate-800 leading-tight`}
+                style={{ fontFamily: jobTitleFont }}
+              >
                 {jobTitle}
               </h1>
               
               <div className="flex flex-wrap gap-3 justify-center">
-                <span className="px-4 py-1.5 rounded-full bg-white/80 backdrop-blur-sm text-sm font-medium text-slate-700">
-                  {location}
-                </span>
-                <span className="px-4 py-1.5 rounded-full bg-white/80 backdrop-blur-sm text-sm font-medium text-slate-700">
-                  {category}
-                </span>
+                {pills.map((pill) => (
+                  <span
+                    key={pill.id}
+                    className="px-4 py-1.5 rounded-full bg-white/80 backdrop-blur-sm text-sm font-medium text-slate-700"
+                    style={{ fontFamily: pill.font }}
+                  >
+                    {pill.text}
+                  </span>
+                ))}
               </div>
             </div>
           </Draggable>
