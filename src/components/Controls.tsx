@@ -22,12 +22,8 @@ interface ControlsProps {
   setJobTitleFont: (value: string) => void;
   jobTitleSize: string;
   setJobTitleSize: (value: string) => void;
-  jobPosition: { x: number; y: number };
-  setJobPosition: (position: { x: number; y: number }) => void;
   pills: Pill[];
   setPills: (pills: Pill[]) => void;
-  pillsPosition: { x: number; y: number };
-  setPillsPosition: (position: { x: number; y: number }) => void;
   setLogo: (value: string | null) => void;
   logoColor: string;
   setLogoColor: (color: string) => void;
@@ -44,12 +40,8 @@ export function Controls({
   setJobTitleFont,
   jobTitleSize,
   setJobTitleSize,
-  jobPosition,
-  setJobPosition,
   pills,
   setPills,
-  pillsPosition,
-  setPillsPosition,
   setLogo,
   logoColor,
   setLogoColor,
@@ -96,8 +88,6 @@ export function Controls({
           setJobTitleFont={setJobTitleFont}
           jobTitleSize={jobTitleSize}
           setJobTitleSize={setJobTitleSize}
-          jobPosition={jobPosition}
-          setJobPosition={setJobPosition}
         />
         
         <Separator />
@@ -106,8 +96,6 @@ export function Controls({
           pills={pills}
           setPills={setPills}
           background={background}
-          pillsPosition={pillsPosition}
-          setPillsPosition={setPillsPosition}
         />
       </div>
     </Card>

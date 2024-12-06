@@ -8,8 +8,6 @@ interface JobTitleControlProps {
   setJobTitleFont: (value: string) => void;
   jobTitleSize: string;
   setJobTitleSize: (value: string) => void;
-  jobPosition: { x: number; y: number };
-  setJobPosition: (position: { x: number; y: number }) => void;
 }
 
 export function JobTitleControl({
@@ -19,8 +17,6 @@ export function JobTitleControl({
   setJobTitleFont,
   jobTitleSize,
   setJobTitleSize,
-  jobPosition,
-  setJobPosition,
 }: JobTitleControlProps) {
   return (
     <div className="space-y-4">
@@ -37,8 +33,6 @@ export function JobTitleControl({
         setJobTitleFont={setJobTitleFont}
         jobTitleSize={jobTitleSize}
         setJobTitleSize={setJobTitleSize}
-        jobPosition={jobPosition}
-        setJobPosition={setJobPosition}
       />
     </div>
   );

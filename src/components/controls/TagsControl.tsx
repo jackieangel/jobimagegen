@@ -1,6 +1,5 @@
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
-import { Slider } from "@/components/ui/slider";
 import { Plus } from "lucide-react";
 import { toast } from "sonner";
 import { TagItem } from "./tags/TagItem";
@@ -16,16 +15,12 @@ interface TagsControlProps {
   pills: Pill[];
   setPills: (pills: Pill[]) => void;
   background: string;
-  pillsPosition: { x: number; y: number };
-  setPillsPosition: (position: { x: number; y: number }) => void;
 }
 
 export function TagsControl({ 
   pills, 
   setPills, 
   background,
-  pillsPosition,
-  setPillsPosition
 }: TagsControlProps) {
   const isDarkTheme = 
     background.includes("Cedar") || 
@@ -102,28 +97,6 @@ export function TagsControl({
             onRemove={removePill}
           />
         ))}
-      </div>
-
-      <div className="space-y-2 pt-4">
-        <Label>Tags Horizontal Position</Label>
-        <Slider
-          value={[pillsPosition.x]}
-          onValueChange={([value]) => setPillsPosition({ ...pillsPosition, x: value })}
-          min={0}
-          max={100}
-          step={1}
-        />
-      </div>
-
-      <div className="space-y-2">
-        <Label>Tags Vertical Position</Label>
-        <Slider
-          value={[pillsPosition.y]}
-          onValueChange={([value]) => setPillsPosition({ ...pillsPosition, y: value })}
-          min={0}
-          max={100}
-          step={1}
-        />
       </div>
     </div>
   );
