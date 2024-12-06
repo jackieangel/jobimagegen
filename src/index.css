@@ -67,7 +67,7 @@
   }
 
   .gradient-motion {
-    animation: gradientMotion 20s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    animation: gradientMotion 60s cubic-bezier(0.4, 0, 0.2, 1) infinite;
     background-size: 200% 200%;
   }
 }
