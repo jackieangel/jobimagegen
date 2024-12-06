@@ -54,12 +54,12 @@
     }
   }
 
-  .gradient-motion {
+  .preview-gradient-motion {
     animation: gradientMotion 15s cubic-bezier(0.4, 0, 0.2, 1) infinite;
     background-size: 200% 200%;
   }
 
-  .gradient-motion[data-theme="light"] {
+  .preview-gradient-motion[data-theme="light"] {
     --gradient-start: var(--initial-gradient);
     --gradient-modified: linear-gradient(var(--angle), 
       color-mix(in srgb, var(--start-color) 85%, white),
@@ -67,7 +67,7 @@
     );
   }
 
-  .gradient-motion[data-theme="dark"] {
+  .preview-gradient-motion[data-theme="dark"] {
     --gradient-start: var(--initial-gradient);
     --gradient-modified: linear-gradient(var(--angle), 
       color-mix(in srgb, var(--start-color) 85%, black),
