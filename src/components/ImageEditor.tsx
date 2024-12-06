@@ -32,7 +32,7 @@ export const ImageEditor = forwardRef<HTMLDivElement, ImageEditorProps>(
     },
     ref
   ) => {
-    const isDarkBackground = 
+    const isDarkTheme = 
       background.includes("Cedar") || 
       background.includes("Nightshade") ||
       background.toLowerCase().includes("linear-gradient") && (
@@ -40,13 +40,22 @@ export const ImageEditor = forwardRef<HTMLDivElement, ImageEditorProps>(
         background.includes("hsl(250, 25%, 10%)") // Nightshade
       );
 
+    // Get appropriate tag background based on theme
+    const getTagBackground = (originalBackground: string) => {
+      if (isDarkTheme) {
+        // Dark theme tag backgrounds with good contrast
+        return "rgba(255, 255, 255, 0.15)"; // Semi-transparent white for dark themes
+      }
+      return originalBackground; // Keep original background for light themes
+    };
+
     return (
       <div
         ref={ref}
         data-gradient-motion
         className={cn(
           "w-full h-full relative",
-          isDarkBackground && "dark"
+          isDarkTheme && "dark"
         )}
         style={{
           background,
@@ -68,7 +77,7 @@ export const ImageEditor = forwardRef<HTMLDivElement, ImageEditorProps>(
               jobTitleSize === "base" && "text-3xl",
               jobTitleSize === "lg" && "text-4xl",
               jobTitleSize === "xl" && "text-5xl",
-              isDarkBackground ? "text-primary-foreground" : "text-primary",
+              isDarkTheme ? "text-white" : "text-gray-900",
               "tracking-tight"
             )}
           >
@@ -79,12 +88,11 @@ export const ImageEditor = forwardRef<HTMLDivElement, ImageEditorProps>(
               <div
                 key={pill.id}
                 className={cn(
-                  "px-4 py-1.5 rounded-full text-sm transition-colors duration-200 hover:bg-opacity-90 font-inter",
-                  isDarkBackground ? "text-primary-foreground" : "text-primary"
+                  "px-4 py-1.5 rounded-full text-sm transition-colors duration-200 hover:bg-opacity-90 font-inter"
                 )}
                 style={{
-                  background: pill.background,
-                  color: isDarkBackground ? 'hsl(0 0% 98%)' : 'hsl(240 5.9% 10%)'
+                  background: getTagBackground(pill.background),
+                  color: isDarkTheme ? 'hsl(0 0% 98%)' : 'hsl(240 5.9% 10%)'
                 }}
               >
                 {pill.text}
