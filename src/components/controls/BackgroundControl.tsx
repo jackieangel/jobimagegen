@@ -17,7 +17,6 @@ export function BackgroundControl({ background, setBackground }: BackgroundContr
   const [gradientMotion, setGradientMotion] = useState(false);
   
   const gradients = [
-    { name: "None (Solid Color)", value: "none" },
     { name: "Ocean", value: "linear-gradient(90deg, hsla(186, 33%, 94%, 1) 0%, hsla(216, 41%, 79%, 1) 100%)" },
     { name: "Sage", value: "linear-gradient(90deg, #E3E6E3 0%, #CBD5CD 100%)" },
     { name: "Dusk", value: "linear-gradient(90deg, #F6F4F8 0%, #E2DDE7 100%)" },
@@ -26,10 +25,10 @@ export function BackgroundControl({ background, setBackground }: BackgroundContr
   ];
 
   const updateGradientAngle = (angle: string) => {
-    if (background === "none" || !background.includes("gradient")) return;
+    if (!background.includes("gradient")) return;
     
     const newAngle = parseInt(angle);
-    if (isNaN(newAngle)) return;
+    if (isNaN(newAngle) || newAngle < 0 || newAngle > 360) return;
     
     setGradientAngle(angle);
     const currentGradient = background.replace(/\d+deg/, `${newAngle}deg`);
@@ -37,7 +36,7 @@ export function BackgroundControl({ background, setBackground }: BackgroundContr
   };
 
   const randomizeGradientStyle = () => {
-    if (background === "none" || !background.includes("gradient")) return;
+    if (!background.includes("gradient")) return;
 
     const currentGradient = gradients.find(g => g.value === background);
     if (!currentGradient) return;
@@ -71,17 +70,35 @@ export function BackgroundControl({ background, setBackground }: BackgroundContr
     }
   };
 
+  const isValidHexColor = (color: string) => {
+    return /^#([A-Fa-f0-9]{3}){1,2}$/.test(color);
+  };
+
+  const handleColorChange = (value: string) => {
+    if (value.startsWith('#')) {
+      if (isValidHexColor(value)) {
+        setBackground(value);
+      }
+    } else if (value.startsWith('#')) {
+      if (value.length <= 7) {
+        setBackground(value);
+      }
+    } else {
+      setBackground('#' + value.replace(/[^0-9A-Fa-f]/g, '').slice(0, 6));
+    }
+  };
+
   return (
     <div className="space-y-4 dark">
       <div className="space-y-2">
-        <Label>Background Style</Label>
+        <Label>Background Color</Label>
         <div className="flex gap-2">
           <Select 
-            value={background === "" ? "none" : background}
+            value={background}
             onValueChange={setBackground}
           >
             <SelectTrigger className="flex-1">
-              <SelectValue placeholder="Select a background style..." />
+              <SelectValue placeholder="Select a background color..." />
             </SelectTrigger>
             <SelectContent>
               {gradients.map((gradient) => (
@@ -94,7 +111,7 @@ export function BackgroundControl({ background, setBackground }: BackgroundContr
         </div>
       </div>
 
-      {background !== "none" && background.includes("gradient") && (
+      {background.includes("gradient") && (
         <Card className="p-4 space-y-4">
           <div className="flex items-center gap-4">
             <div className="flex-1 space-y-2">
@@ -145,21 +162,21 @@ export function BackgroundControl({ background, setBackground }: BackgroundContr
         </Card>
       )}
 
-      {background === "none" && (
+      {!background.includes("gradient") && (
         <div className="space-y-2">
           <Label htmlFor="background">Solid Color</Label>
           <div className="flex gap-2">
             <Input
               id="background"
               type="color"
-              value={background === "none" ? "#ffffff" : background}
-              onChange={(e) => setBackground(e.target.value)}
+              value={background}
+              onChange={(e) => handleColorChange(e.target.value)}
               className="w-12 h-12 p-1 cursor-pointer"
             />
             <Input
               type="text"
-              value={background === "none" ? "#ffffff" : background}
-              onChange={(e) => setBackground(e.target.value)}
+              value={background}
+              onChange={(e) => handleColorChange(e.target.value)}
               className="font-mono"
               placeholder="#000000"
             />
