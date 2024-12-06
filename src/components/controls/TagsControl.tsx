@@ -4,6 +4,8 @@ import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Plus, X } from "lucide-react";
 import { toast } from "sonner";
+import { Card } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 
 interface Pill {
   id: number;
@@ -58,7 +60,7 @@ export function TagsControl({ pills, setPills }: TagsControlProps) {
   };
 
   return (
-    <div className="space-y-2">
+    <div className="space-y-4">
       <div className="flex items-center justify-between">
         <Label>Tags ({pills.length}/4)</Label>
         <Button
@@ -73,25 +75,29 @@ export function TagsControl({ pills, setPills }: TagsControlProps) {
           Add Tag
         </Button>
       </div>
+
       <div className="space-y-3">
         {pills.map((pill) => (
-          <div key={pill.id} className="space-y-2">
-            <div className="flex gap-2">
-              <Input
-                value={pill.text}
-                onChange={(e) => updatePill(pill.id, e.target.value)}
-                placeholder="Enter tag text"
-              />
+          <Card key={pill.id} className="p-4 space-y-4">
+            <div className="flex items-center gap-2">
+              <div className="flex-1">
+                <Input
+                  value={pill.text}
+                  onChange={(e) => updatePill(pill.id, e.target.value)}
+                  placeholder="Enter tag text"
+                />
+              </div>
               <Button
                 type="button"
                 variant="ghost"
                 size="icon"
                 onClick={() => removePill(pill.id)}
-                className="h-10 w-10"
+                className="h-10 w-10 shrink-0"
               >
                 <X className="w-4 h-4" />
               </Button>
             </div>
+
             <div className="grid grid-cols-2 gap-2">
               <Select value={pill.font} onValueChange={(font) => updatePillFont(pill.id, font)}>
                 <SelectTrigger>
@@ -121,7 +127,21 @@ export function TagsControl({ pills, setPills }: TagsControlProps) {
                 </SelectContent>
               </Select>
             </div>
-          </div>
+
+            <div className="pt-2">
+              <Label className="text-sm text-muted-foreground mb-2 block">Preview:</Label>
+              <Badge
+                className="px-4 py-1.5 rounded-full"
+                style={{ 
+                  fontFamily: pill.font,
+                  backgroundColor: pill.background,
+                  color: 'rgb(51, 65, 85)'
+                }}
+              >
+                {pill.text || 'Tag Preview'}
+              </Badge>
+            </div>
+          </Card>
         ))}
       </div>
     </div>

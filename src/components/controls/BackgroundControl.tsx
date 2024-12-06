@@ -3,8 +3,9 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Switch } from "@/components/ui/switch";
-import { Shuffle } from "lucide-react";
+import { Shuffle, RotateCcw } from "lucide-react";
 import { useState } from "react";
+import { Card } from "@/components/ui/card";
 
 interface BackgroundControlProps {
   background: string;
@@ -100,26 +101,39 @@ export function BackgroundControl({ background, setBackground }: BackgroundContr
       </div>
 
       {background !== "none" && background.includes("gradient") && (
-        <>
+        <Card className="p-4 space-y-4">
           <div className="flex items-center gap-4">
             <div className="flex-1 space-y-2">
               <Label>Gradient Angle</Label>
-              <div className="flex gap-2">
-                <Input
-                  type="number"
-                  min="0"
-                  max="360"
-                  value={gradientAngle}
-                  onChange={(e) => updateGradientAngle(e.target.value)}
-                  className="w-24"
-                />
-                <span className="text-sm text-muted-foreground flex items-center">degrees</span>
+              <div className="flex items-center gap-2">
+                <div className="relative flex-1">
+                  <Input
+                    type="number"
+                    min="0"
+                    max="360"
+                    value={gradientAngle}
+                    onChange={(e) => updateGradientAngle(e.target.value)}
+                    className="pr-12"
+                  />
+                  <span className="absolute right-3 top-1/2 -translate-y-1/2 text-sm text-muted-foreground">
+                    deg
+                  </span>
+                </div>
+                <Button
+                  variant="outline"
+                  size="icon"
+                  onClick={() => updateGradientAngle("0")}
+                  title="Reset angle"
+                  className="shrink-0"
+                >
+                  <RotateCcw className="h-4 w-4" />
+                </Button>
                 <Button
                   variant="outline"
                   size="icon"
                   onClick={randomizeGradientStyle}
                   title="Randomize gradient style"
-                  className="ml-auto"
+                  className="shrink-0"
                 >
                   <Shuffle className="h-4 w-4" />
                 </Button>
@@ -134,7 +148,7 @@ export function BackgroundControl({ background, setBackground }: BackgroundContr
             />
             <Label htmlFor="gradient-motion">Enable gradient motion</Label>
           </div>
-        </>
+        </Card>
       )}
 
       {background === "none" && (
