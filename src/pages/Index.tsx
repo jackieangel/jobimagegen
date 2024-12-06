@@ -55,7 +55,7 @@ export default function Index() {
           </div>
 
           <Card className="p-3 sm:p-4 md:p-6 bg-accent">
-            <div className="sticky top-0">
+            <div className={`sticky ${activeTemplate === 'linkedin-post' ? 'top-0' : 'top-1/2 -translate-y-1/2'}`}>
               <div className="w-full flex flex-col items-center justify-center gap-4">
                 <p className="text-sm text-muted-foreground">
                   Template Aspect Ratio: {aspectRatio}
