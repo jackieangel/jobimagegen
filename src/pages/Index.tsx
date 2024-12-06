@@ -10,15 +10,15 @@ export default function Index() {
   const [jobTitleFont, setJobTitleFont] = useState("Playfair Display");
   const [jobTitleSize, setJobTitleSize] = useState("4xl");
   const [pills, setPills] = useState([
-    { id: 1, text: "PARIS / REMOTE", font: "Inter" },
-    { id: 2, text: "UX/UI DESIGN", font: "Inter" },
+    { id: 1, text: "PARIS / REMOTE", font: "Inter", background: "#f3f4f6" },
+    { id: 2, text: "UX/UI DESIGN", font: "Inter", background: "#f3f4f6" },
   ]);
   const [logo, setLogo] = useState<string | null>(null);
 
   // Calculate preview dimensions while maintaining aspect ratio
   const template = templates[activeTemplate];
-  const maxPreviewWidth = 600; // Maximum width for the preview
-  const maxPreviewHeight = 600; // Maximum height for the preview
+  const maxPreviewWidth = 600;
+  const maxPreviewHeight = 600;
   const aspectRatio = template.width / template.height;
   
   let previewWidth = Math.min(maxPreviewWidth, template.width);
@@ -45,23 +45,25 @@ export default function Index() {
         <div className="grid lg:grid-cols-[1fr,380px] gap-6">
           <div className="relative">
             <div className="sticky top-6">
-              <div 
-                className="flex items-center justify-center bg-white/50 backdrop-blur-sm rounded-lg border border-slate-200/50 shadow-sm transition-all duration-300"
-                style={{
-                  width: `${previewWidth}px`,
-                  height: `${previewHeight}px`,
-                  margin: '0 auto'
-                }}
-              >
-                <ImageEditor
-                  template={template}
-                  background={background === "none" ? "#ffffff" : background}
-                  jobTitle={jobTitle}
-                  jobTitleFont={jobTitleFont}
-                  jobTitleSize={jobTitleSize}
-                  pills={pills}
-                  logo={logo}
-                />
+              <div className="h-[600px] flex items-center justify-center">
+                <div 
+                  className="bg-white/50 backdrop-blur-sm rounded-lg border border-slate-200/50 shadow-sm transition-all duration-300"
+                  style={{
+                    width: `${previewWidth}px`,
+                    height: `${previewHeight}px`,
+                    margin: '0 auto'
+                  }}
+                >
+                  <ImageEditor
+                    template={template}
+                    background={background === "none" ? "#ffffff" : background}
+                    jobTitle={jobTitle}
+                    jobTitleFont={jobTitleFont}
+                    jobTitleSize={jobTitleSize}
+                    pills={pills}
+                    logo={logo}
+                  />
+                </div>
               </div>
             </div>
           </div>

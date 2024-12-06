@@ -8,6 +8,7 @@ interface Pill {
   id: number;
   text: string;
   font: string;
+  background: string;
 }
 
 interface TagsControlProps {
@@ -16,10 +17,17 @@ interface TagsControlProps {
 }
 
 const fontOptions = ["Playfair Display", "Inter", "Arial", "Georgia", "Times New Roman"];
+const backgroundOptions = [
+  { label: "Light Gray", value: "#f3f4f6" },
+  { label: "Light Blue", value: "#e0f2fe" },
+  { label: "Light Green", value: "#dcfce7" },
+  { label: "Light Purple", value: "#f3e8ff" },
+  { label: "Light Pink", value: "#fce7f3" },
+];
 
 export function TagsControl({ pills, setPills }: TagsControlProps) {
   const addPill = () => {
-    setPills([...pills, { id: Date.now(), text: "New Tag", font: "Inter" }]);
+    setPills([...pills, { id: Date.now(), text: "New Tag", font: "Inter", background: "#f3f4f6" }]);
   };
 
   const removePill = (id: number) => {
@@ -35,6 +43,12 @@ export function TagsControl({ pills, setPills }: TagsControlProps) {
   const updatePillFont = (id: number, font: string) => {
     setPills(pills.map(pill => 
       pill.id === id ? { ...pill, font } : pill
+    ));
+  };
+
+  const updatePillBackground = (id: number, background: string) => {
+    setPills(pills.map(pill => 
+      pill.id === id ? { ...pill, background } : pill
     ));
   };
 
@@ -55,33 +69,52 @@ export function TagsControl({ pills, setPills }: TagsControlProps) {
       </div>
       <div className="space-y-3">
         {pills.map((pill) => (
-          <div key={pill.id} className="flex gap-2">
-            <Input
-              value={pill.text}
-              onChange={(e) => updatePill(pill.id, e.target.value)}
-              placeholder="Enter tag text"
-            />
-            <Select value={pill.font} onValueChange={(font) => updatePillFont(pill.id, font)}>
-              <SelectTrigger className="w-[140px]">
-                <SelectValue placeholder="Font" />
-              </SelectTrigger>
-              <SelectContent>
-                {fontOptions.map(font => (
-                  <SelectItem key={font} value={font}>
-                    {font}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-            <Button
-              type="button"
-              variant="ghost"
-              size="icon"
-              onClick={() => removePill(pill.id)}
-              className="h-10 w-10"
-            >
-              <X className="w-4 h-4" />
-            </Button>
+          <div key={pill.id} className="space-y-2">
+            <div className="flex gap-2">
+              <Input
+                value={pill.text}
+                onChange={(e) => updatePill(pill.id, e.target.value)}
+                placeholder="Enter tag text"
+              />
+              <Button
+                type="button"
+                variant="ghost"
+                size="icon"
+                onClick={() => removePill(pill.id)}
+                className="h-10 w-10"
+              >
+                <X className="w-4 h-4" />
+              </Button>
+            </div>
+            <div className="grid grid-cols-2 gap-2">
+              <Select value={pill.font} onValueChange={(font) => updatePillFont(pill.id, font)}>
+                <SelectTrigger>
+                  <SelectValue placeholder="Font" />
+                </SelectTrigger>
+                <SelectContent>
+                  {fontOptions.map(font => (
+                    <SelectItem key={font} value={font}>
+                      {font}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+              <Select 
+                value={pill.background} 
+                onValueChange={(bg) => updatePillBackground(pill.id, bg)}
+              >
+                <SelectTrigger>
+                  <SelectValue placeholder="Background" />
+                </SelectTrigger>
+                <SelectContent>
+                  {backgroundOptions.map(bg => (
+                    <SelectItem key={bg.value} value={bg.value}>
+                      {bg.label}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
           </div>
         ))}
       </div>

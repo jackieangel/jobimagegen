@@ -12,7 +12,7 @@ interface JobTitleControlProps {
 }
 
 const fontOptions = ["Playfair Display", "Inter", "Arial", "Georgia", "Times New Roman"];
-const sizeOptions = ["3xl", "4xl", "5xl", "6xl", "7xl"];
+const sizeOptions = ["3xl", "4xl", "5xl"]; // Reduced size options
 
 export function JobTitleControl({
   jobTitle,

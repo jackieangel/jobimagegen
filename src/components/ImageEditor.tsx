@@ -10,6 +10,7 @@ interface Pill {
   id: number;
   text: string;
   font: string;
+  background: string;
 }
 
 interface ImageEditorProps {
@@ -97,8 +98,11 @@ export function ImageEditor({
                 {pills.map((pill) => (
                   <span
                     key={pill.id}
-                    className="px-4 py-1.5 rounded-full bg-white/80 backdrop-blur-sm text-sm font-medium text-slate-700"
-                    style={{ fontFamily: pill.font }}
+                    className="px-4 py-1.5 rounded-full backdrop-blur-sm text-sm font-medium text-slate-700"
+                    style={{ 
+                      fontFamily: pill.font,
+                      backgroundColor: pill.background
+                    }}
                   >
                     {pill.text}
                   </span>
