@@ -1,6 +1,5 @@
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Slider } from "@/components/ui/slider";
 import { useState } from "react";
 import { toast } from "sonner";
 import { Card } from "@/components/ui/card";
@@ -8,22 +7,14 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 
 interface LogoControlProps {
   setLogo: (value: string | null) => void;
-  logoPosition: { x: number; y: number };
-  setLogoPosition: (position: { x: number; y: number }) => void;
   logoColor: string;
   setLogoColor: (color: string) => void;
-  logoScale: number;
-  setLogoScale: (scale: number) => void;
 }
 
 export function LogoControl({ 
   setLogo, 
-  logoPosition,
-  setLogoPosition,
   logoColor,
   setLogoColor,
-  logoScale,
-  setLogoScale
 }: LogoControlProps) {
   const [fileType, setFileType] = useState<"png" | "svg" | null>(null);
 
@@ -111,17 +102,6 @@ export function LogoControl({
           </Select>
         </div>
       )}
-
-      <div className="space-y-2">
-        <Label>Logo Scale ({Math.round(logoScale * 100)}%)</Label>
-        <Slider
-          value={[logoScale]}
-          onValueChange={([value]) => setLogoScale(value)}
-          min={0.1}
-          max={2}
-          step={0.1}
-        />
-      </div>
     </Card>
   );
 }

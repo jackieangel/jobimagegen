@@ -22,7 +22,6 @@ interface ImageEditorProps {
   logo: string | null;
   logoPosition: { x: number; y: number };
   logoColor: string;
-  logoScale: number;
   setLogoPosition?: (position: { x: number; y: number }) => void;
   gradientMotion?: boolean;
 }
@@ -41,7 +40,6 @@ export const ImageEditor = forwardRef<HTMLDivElement, ImageEditorProps>(
       logo,
       logoPosition,
       logoColor,
-      logoScale,
       setLogoPosition,
       gradientMotion = false,
     } = props;
@@ -111,7 +109,7 @@ export const ImageEditor = forwardRef<HTMLDivElement, ImageEditorProps>(
                   alt="Company logo" 
                   className="object-contain transition-all duration-200"
                   style={{
-                    height: `${48 * logoScale}px`,
+                    height: '48px',
                     filter: logo.endsWith('.svg') ? `brightness(0) saturate(100%) ${logoColor === '#FFFFFF' ? 'invert(1)' : ''}` : 'none',
                     color: logoColor
                   }}

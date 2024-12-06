@@ -21,7 +21,6 @@ export default function Index() {
   const [logo, setLogo] = useState<string | null>(null);
   const [logoPosition, setLogoPosition] = useState({ x: 50, y: 25 });
   const [logoColor, setLogoColor] = useState("#000000");
-  const [logoScale, setLogoScale] = useState(1);
 
   const editorRef = useRef<HTMLDivElement>(null);
   const actionBarRef = useRef<HTMLDivElement>(null);
@@ -58,12 +57,8 @@ export default function Index() {
                 pillsPosition={pillsPosition}
                 setPillsPosition={() => {}}
                 setLogo={setLogo}
-                logoPosition={logoPosition}
-                setLogoPosition={() => {}}
                 logoColor={logoColor}
                 setLogoColor={setLogoColor}
-                logoScale={logoScale}
-                setLogoScale={setLogoScale}
                 activeTemplate={activeTemplate}
                 setActiveTemplate={setActiveTemplate}
               />
@@ -105,7 +100,6 @@ export default function Index() {
                           logo={logo}
                           logoPosition={logoPosition}
                           logoColor={logoColor}
-                          logoScale={logoScale}
                           setLogoPosition={setLogoPosition}
                         />
                       </div>

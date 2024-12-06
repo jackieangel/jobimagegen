@@ -29,12 +29,8 @@ interface ControlsProps {
   pillsPosition: { x: number; y: number };
   setPillsPosition: (position: { x: number; y: number }) => void;
   setLogo: (value: string | null) => void;
-  logoPosition: { x: number; y: number };
-  setLogoPosition: (position: { x: number; y: number }) => void;
   logoColor: string;
   setLogoColor: (color: string) => void;
-  logoScale: number;
-  setLogoScale: (scale: number) => void;
   activeTemplate: string;
   setActiveTemplate: (value: string) => void;
 }
@@ -55,12 +51,8 @@ export function Controls({
   pillsPosition,
   setPillsPosition,
   setLogo,
-  logoPosition,
-  setLogoPosition,
   logoColor,
   setLogoColor,
-  logoScale,
-  setLogoScale,
   activeTemplate,
   setActiveTemplate,
 }: ControlsProps) {
@@ -91,12 +83,8 @@ export function Controls({
 
         <LogoControl
           setLogo={setLogo}
-          logoPosition={logoPosition}
-          setLogoPosition={setLogoPosition}
           logoColor={logoColor}
           setLogoColor={setLogoColor}
-          logoScale={logoScale}
-          setLogoScale={setLogoScale}
         />
         
         <Separator />
