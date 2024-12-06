@@ -17,6 +17,7 @@ interface ImageEditorProps {
     background: string;
   }[];
   logo: string | null;
+  gradientMotion?: boolean;
 }
 
 export const ImageEditor = forwardRef<HTMLDivElement, ImageEditorProps>(
@@ -29,6 +30,7 @@ export const ImageEditor = forwardRef<HTMLDivElement, ImageEditorProps>(
       jobTitleSize,
       pills,
       logo,
+      gradientMotion = false,
     },
     ref
   ) => {
@@ -58,7 +60,8 @@ export const ImageEditor = forwardRef<HTMLDivElement, ImageEditorProps>(
         className={cn(
           "w-full h-full relative",
           isDarkTheme && "dark",
-          isGradient && "preview-gradient-motion"
+          isGradient && "preview-gradient-motion",
+          isGradient && !gradientMotion && "disabled"
         )}
         style={{
           background,

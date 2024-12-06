@@ -101,7 +101,7 @@
     }
     50% {
       background-position: 100% 50%;
-      filter: hue-rotate(45deg);
+      filter: hue-rotate(15deg);
     }
     100% {
       background-position: 0% 50%;
@@ -112,5 +112,10 @@
   .preview-gradient-motion {
     background-size: 200% 200%;
     animation: gradientMotion 3s ease infinite;
+  }
+
+  .preview-gradient-motion.disabled {
+    animation: none;
+    background-size: 100% 100%;
   }
 }
