@@ -29,7 +29,7 @@
     --border: 0 0% 89%;
     --input: 0 0% 89%;
     --ring: 0 0% 12%;
-    --radius: 0;
+    --radius: 0.5rem;
   }
  
   * {
@@ -39,27 +39,17 @@
   body {
     @apply bg-background text-foreground font-inter antialiased;
   }
-}
 
-.font-playfair {
-  font-family: 'Playfair Display', serif;
-}
-
-.font-inter {
-  font-family: 'Inter', sans-serif;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
+  /* Enhanced input fields */
+  input, select, textarea {
+    @apply rounded-md shadow-sm;
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
 
-.animate-fade-in {
-  animation: fadeIn 0.5s ease-out forwards;
+  /* 3D Call to Action Button */
+  button[type="submit"],
+  .button-3d {
+    @apply transform transition-all duration-200 shadow-lg hover:shadow-xl active:shadow-md active:translate-y-0.5;
+    background: linear-gradient(180deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 100%);
+    border-bottom: 3px solid rgba(0,0,0,0.2);
+  }
 }

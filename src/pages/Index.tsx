@@ -18,6 +18,7 @@ export default function Index() {
   const [logo, setLogo] = useState<string | null>(null);
 
   const template = templates[activeTemplate];
+  const aspectRatio = `${template.width}:${template.height}`;
 
   return (
     <Card className="min-h-[1000px] max-h-[1000px] max-w-[1000px] mx-auto bg-card">
@@ -55,15 +56,15 @@ export default function Index() {
 
           <Card className="p-3 sm:p-4 md:p-6 bg-accent">
             <div className="sticky top-6 h-full">
-              <div className="w-full h-full flex items-center justify-center">
+              <div className="w-full h-full flex flex-col items-center justify-center gap-4">
+                <p className="text-sm text-muted-foreground">
+                  Template Aspect Ratio: {aspectRatio}
+                </p>
                 <div 
-                  className="relative transition-all duration-300 bg-card shadow-sm"
+                  className="relative w-full transition-all duration-300 bg-card shadow-sm"
                   style={{
-                    width: `${template.width}px`,
-                    height: `${template.height}px`,
                     maxWidth: '100%',
-                    maxHeight: '100%',
-                    aspectRatio: `${template.width} / ${template.height}`,
+                    aspectRatio: template.width / template.height,
                   }}
                 >
                   <ImageEditor
