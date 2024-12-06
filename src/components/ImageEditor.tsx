@@ -109,12 +109,12 @@ export const ImageEditor = forwardRef<HTMLDivElement, ImageEditorProps>(
                   alt="Company logo" 
                   className="object-contain transition-all duration-200"
                   style={{
-                    height: '32px', // Reduced from 48px
-                    maxWidth: '120px', // Added max-width constraint
+                    height: '32px',
+                    maxWidth: '120px',
                     filter: logo.endsWith('.svg') ? `brightness(0) saturate(100%) ${logoColor === '#FFFFFF' ? 'invert(1)' : ''}` : 'none',
                     color: logoColor,
-                    willChange: 'transform', // Improves performance for transforms
-                    touchAction: 'none', // Better touch device handling
+                    willChange: 'transform',
+                    touchAction: 'none',
                   }}
                 />
               </div>
@@ -122,7 +122,7 @@ export const ImageEditor = forwardRef<HTMLDivElement, ImageEditorProps>(
           )}
           
           <div 
-            className="absolute transition-all duration-200 flex flex-col items-center gap-3"
+            className="absolute transition-all duration-200 flex flex-col items-center gap-4"
             style={{
               left: '50%',
               top: '50%',
