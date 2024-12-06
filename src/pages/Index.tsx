@@ -31,8 +31,28 @@ export default function Index() {
           </p>
         </header>
 
-        <div className="grid lg:grid-cols-[1fr,320px] gap-4 md:gap-8 h-[calc(100%-120px)]">
-          <div className="order-2 lg:order-1">
+        <div className="grid lg:grid-cols-[320px,1fr] gap-4 md:gap-8 h-[calc(100%-120px)]">
+          <div className="h-full">
+            <ScrollArea className="h-full pr-4">
+              <Controls
+                background={background}
+                setBackground={setBackground}
+                jobTitle={jobTitle}
+                setJobTitle={setJobTitle}
+                jobTitleFont={jobTitleFont}
+                setJobTitleFont={setJobTitleFont}
+                jobTitleSize={jobTitleSize}
+                setJobTitleSize={setJobTitleSize}
+                pills={pills}
+                setPills={setPills}
+                setLogo={setLogo}
+                activeTemplate={activeTemplate}
+                setActiveTemplate={setActiveTemplate}
+              />
+            </ScrollArea>
+          </div>
+
+          <div>
             <div className="sticky top-6 h-full">
               {/* Outer wrapper with fixed dimensions and background */}
               <div className="w-full h-full bg-slate-50 flex items-center justify-center p-6">
@@ -59,26 +79,6 @@ export default function Index() {
                 </div>
               </div>
             </div>
-          </div>
-
-          <div className="order-1 lg:order-2 h-full">
-            <ScrollArea className="h-full pr-4">
-              <Controls
-                background={background}
-                setBackground={setBackground}
-                jobTitle={jobTitle}
-                setJobTitle={setJobTitle}
-                jobTitleFont={jobTitleFont}
-                setJobTitleFont={setJobTitleFont}
-                jobTitleSize={jobTitleSize}
-                setJobTitleSize={setJobTitleSize}
-                pills={pills}
-                setPills={setPills}
-                setLogo={setLogo}
-                activeTemplate={activeTemplate}
-                setActiveTemplate={setActiveTemplate}
-              />
-            </ScrollArea>
           </div>
         </div>
       </div>
