@@ -10,7 +10,7 @@ interface TemplateControlProps {
 export function TemplateControl({ activeTemplate, setActiveTemplate }: TemplateControlProps) {
   return (
     <div className="space-y-2">
-      <Label>Template Size</Label>
+      <Label>Template</Label>
       <Select value={activeTemplate} onValueChange={setActiveTemplate}>
         <SelectTrigger>
           <SelectValue placeholder="Select template size" />
