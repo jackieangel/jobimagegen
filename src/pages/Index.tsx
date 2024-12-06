@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -8,7 +8,7 @@ import { templates } from "@/lib/templates";
 
 export default function Index() {
   const [activeTemplate, setActiveTemplate] = useState("instagram-post");
-  const [background, setBackground] = useState("#E5F0FF");
+  const [background, setBackground] = useState("none");
   const [jobTitle, setJobTitle] = useState("Design Chief of Staff");
   const [jobTitleFont, setJobTitleFont] = useState("Playfair Display");
   const [jobTitleSize, setJobTitleSize] = useState("4xl");
@@ -31,48 +31,35 @@ export default function Index() {
           </p>
         </header>
 
-        <Tabs defaultValue="instagram-post" className="space-y-6">
-          <TabsList className="grid w-full max-w-md mx-auto grid-cols-3 h-auto p-1">
-            {Object.entries(templates).map(([key, template]) => (
-              <TabsTrigger
-                key={key}
-                value={key}
-                className="py-2 data-[state=active]:bg-white text-sm"
-                onClick={() => setActiveTemplate(key)}
-              >
-                {template.name}
-              </TabsTrigger>
-            ))}
-          </TabsList>
-
-          <div className="grid lg:grid-cols-[1fr,380px] gap-6">
-            <Card className="p-4 sm:p-6 flex items-center justify-center bg-white/50 backdrop-blur-sm">
-              <ImageEditor
-                template={templates[activeTemplate]}
-                background={background}
-                jobTitle={jobTitle}
-                jobTitleFont={jobTitleFont}
-                jobTitleSize={jobTitleSize}
-                pills={pills}
-                logo={logo}
-              />
-            </Card>
-
-            <Controls
-              background={background}
-              setBackground={setBackground}
+        <div className="grid lg:grid-cols-[1fr,380px] gap-6">
+          <Card className="p-4 sm:p-6 flex items-center justify-center bg-white/50 backdrop-blur-sm">
+            <ImageEditor
+              template={templates[activeTemplate]}
+              background={background === "none" ? "#ffffff" : background}
               jobTitle={jobTitle}
-              setJobTitle={setJobTitle}
               jobTitleFont={jobTitleFont}
-              setJobTitleFont={setJobTitleFont}
               jobTitleSize={jobTitleSize}
-              setJobTitleSize={setJobTitleSize}
               pills={pills}
-              setPills={setPills}
-              setLogo={setLogo}
+              logo={logo}
             />
-          </div>
-        </Tabs>
+          </Card>
+
+          <Controls
+            background={background}
+            setBackground={setBackground}
+            jobTitle={jobTitle}
+            setJobTitle={setJobTitle}
+            jobTitleFont={jobTitleFont}
+            setJobTitleFont={setJobTitleFont}
+            jobTitleSize={jobTitleSize}
+            setJobTitleSize={setJobTitleSize}
+            pills={pills}
+            setPills={setPills}
+            setLogo={setLogo}
+            activeTemplate={activeTemplate}
+            setActiveTemplate={setActiveTemplate}
+          />
+        </div>
       </div>
     </div>
   );

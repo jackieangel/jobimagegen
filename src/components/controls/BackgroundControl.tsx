@@ -9,7 +9,7 @@ interface BackgroundControlProps {
 
 export function BackgroundControl({ background, setBackground }: BackgroundControlProps) {
   const gradients = [
-    { name: "None (Solid Color)", value: "" },
+    { name: "None (Solid Color)", value: "none" },
     { name: "Sunset", value: "linear-gradient(90deg, hsla(24, 100%, 83%, 1) 0%, hsla(341, 91%, 68%, 1) 100%)" },
     { name: "Ocean", value: "linear-gradient(90deg, hsla(186, 33%, 94%, 1) 0%, hsla(216, 41%, 79%, 1) 100%)" },
     { name: "Forest", value: "linear-gradient(90deg, hsla(139, 70%, 75%, 1) 0%, hsla(63, 90%, 76%, 1) 100%)" },
@@ -20,7 +20,7 @@ export function BackgroundControl({ background, setBackground }: BackgroundContr
     <div className="space-y-4">
       <div className="space-y-2">
         <Label>Background Style</Label>
-        <Select value={background} onValueChange={setBackground}>
+        <Select value={background === "" ? "none" : background} onValueChange={setBackground}>
           <SelectTrigger>
             <SelectValue placeholder="Select background style" />
           </SelectTrigger>
@@ -34,20 +34,20 @@ export function BackgroundControl({ background, setBackground }: BackgroundContr
         </Select>
       </div>
 
-      {!background && (
+      {background === "none" && (
         <div className="space-y-2">
           <Label htmlFor="background">Solid Color</Label>
           <div className="flex gap-2">
             <Input
               id="background"
               type="color"
-              value={background}
+              value={background === "none" ? "#ffffff" : background}
               onChange={(e) => setBackground(e.target.value)}
               className="w-12 h-12 p-1 cursor-pointer"
             />
             <Input
               type="text"
-              value={background}
+              value={background === "none" ? "#ffffff" : background}
               onChange={(e) => setBackground(e.target.value)}
               className="font-mono"
               placeholder="#000000"
