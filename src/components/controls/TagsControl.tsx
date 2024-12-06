@@ -1,10 +1,8 @@
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Plus, X } from "lucide-react";
+import { Label } from "@/components/ui/label";
+import { Plus } from "lucide-react";
 import { toast } from "sonner";
-import { Card } from "@/components/ui/card";
+import { TagItem } from "./tags/TagItem";
 
 interface Pill {
   id: number;
@@ -18,23 +16,6 @@ interface TagsControlProps {
   setPills: (pills: Pill[]) => void;
   background: string;
 }
-
-const lightThemeColors = [
-  { label: "Light Gray", value: "rgba(243, 244, 246, 0.8)" },
-  { label: "Light Blue", value: "rgba(224, 242, 254, 0.8)" },
-  { label: "Light Green", value: "rgba(220, 252, 231, 0.8)" },
-  { label: "Light Purple", value: "rgba(243, 232, 255, 0.8)" },
-  { label: "Light Pink", value: "rgba(252, 231, 243, 0.8)" },
-];
-
-const darkThemeColors = [
-  { label: "Dark Gray", value: "rgba(255, 255, 255, 0.15)" },
-  { label: "Dark Blue", value: "rgba(30, 58, 138, 0.9)" },
-  { label: "Dark Purple", value: "rgba(88, 28, 135, 0.9)" },
-];
-
-const defaultLightThemeColor = "rgba(243, 244, 246, 0.8)"; // Light Gray
-const defaultDarkThemeColor = "rgba(255, 255, 255, 0.15)"; // Dark Gray
 
 export function TagsControl({ pills, setPills, background }: TagsControlProps) {
   const isDarkTheme = 
@@ -50,16 +31,15 @@ export function TagsControl({ pills, setPills, background }: TagsControlProps) {
       toast.error("Maximum of 4 tags allowed");
       return;
     }
-    setPills([...pills, { 
-      id: Date.now(), 
-      text: "New Tag", 
-      font: "Inter", 
-      background: isDarkTheme ? defaultDarkThemeColor : defaultLightThemeColor
-    }]);
-  };
-
-  const removePill = (id: number) => {
-    setPills(pills.filter(pill => pill.id !== id));
+    setPills([
+      ...pills, 
+      { 
+        id: Date.now(), 
+        text: "New Tag", 
+        font: "Inter", 
+        background: isDarkTheme ? "rgba(255, 255, 255, 0.15)" : "rgba(243, 244, 246, 0.8)"
+      }
+    ]);
   };
 
   const updatePill = (id: number, text: string) => {
@@ -74,10 +54,8 @@ export function TagsControl({ pills, setPills, background }: TagsControlProps) {
     ));
   };
 
-  const getColorLabel = (value: string) => {
-    const colors = isDarkTheme ? darkThemeColors : lightThemeColors;
-    const color = colors.find(color => color.value === value);
-    return color ? color.label : isDarkTheme ? "Dark Gray" : "Light Gray";
+  const removePill = (id: number) => {
+    setPills(pills.filter(pill => pill.id !== id));
   };
 
   return (
@@ -104,46 +82,16 @@ export function TagsControl({ pills, setPills, background }: TagsControlProps) {
 
       <div className="space-y-3">
         {pills.map((pill) => (
-          <Card key={pill.id} className="p-4 space-y-4">
-            <div className="flex items-center gap-2">
-              <div className="flex-1">
-                <Input
-                  value={pill.text}
-                  onChange={(e) => updatePill(pill.id, e.target.value)}
-                  placeholder="Enter tag text"
-                />
-              </div>
-              <Button
-                type="button"
-                variant="ghost"
-                size="icon"
-                onClick={() => removePill(pill.id)}
-                className="h-10 w-10 shrink-0"
-              >
-                <X className="w-4 h-4" />
-              </Button>
-            </div>
-
-            <div>
-              <Select 
-                value={pill.background} 
-                onValueChange={(bg) => updatePillBackground(pill.id, bg)}
-              >
-                <SelectTrigger>
-                  <SelectValue>
-                    {getColorLabel(pill.background)}
-                  </SelectValue>
-                </SelectTrigger>
-                <SelectContent>
-                  {(isDarkTheme ? darkThemeColors : lightThemeColors).map(bg => (
-                    <SelectItem key={bg.value} value={bg.value}>
-                      {bg.label}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
-          </Card>
+          <TagItem
+            key={pill.id}
+            id={pill.id}
+            text={pill.text}
+            background={pill.background}
+            isDarkTheme={isDarkTheme}
+            onUpdate={updatePill}
+            onUpdateBackground={updatePillBackground}
+            onRemove={removePill}
+          />
         ))}
       </div>
     </div>
