@@ -90,7 +90,12 @@ export function ImageEditor({
             <div className="cursor-move space-y-6">
               <h1 
                 className={`text-${jobTitleSize} font-medium text-slate-800 leading-tight`}
-                style={{ fontFamily: jobTitleFont }}
+                style={{ 
+                  fontFamily: jobTitleFont,
+                  fontSize: jobTitleSize === '3xl' ? '1.875rem' : 
+                           jobTitleSize === '4xl' ? '2.25rem' : 
+                           jobTitleSize === '5xl' ? '3rem' : '3.75rem'
+                }}
               >
                 {jobTitle}
               </h1>

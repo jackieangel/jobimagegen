@@ -3,6 +3,7 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Plus, X } from "lucide-react";
+import { toast } from "sonner";
 
 interface Pill {
   id: number;
@@ -27,6 +28,10 @@ const backgroundOptions = [
 
 export function TagsControl({ pills, setPills }: TagsControlProps) {
   const addPill = () => {
+    if (pills.length >= 4) {
+      toast.error("Maximum of 4 tags allowed");
+      return;
+    }
     setPills([...pills, { id: Date.now(), text: "New Tag", font: "Inter", background: "#f3f4f6" }]);
   };
 
@@ -55,13 +60,14 @@ export function TagsControl({ pills, setPills }: TagsControlProps) {
   return (
     <div className="space-y-2">
       <div className="flex items-center justify-between">
-        <Label>Tags</Label>
+        <Label>Tags ({pills.length}/4)</Label>
         <Button
           type="button"
           variant="outline"
           size="sm"
           onClick={addPill}
           className="h-8"
+          disabled={pills.length >= 4}
         >
           <Plus className="w-4 h-4 mr-1" />
           Add Tag

@@ -21,7 +21,7 @@ export default function Index() {
   const aspectRatio = `${template.width}:${template.height}`;
 
   return (
-    <Card className="min-h-[1000px] max-h-[1000px] max-w-[1000px] mx-auto bg-card">
+    <Card className="min-h-[1000px] max-h-[1000px] max-w-[1400px] mx-auto bg-card">
       <div className="container h-full px-2 sm:px-4 py-4 sm:py-6 md:py-8">
         <header className="text-center space-y-2 sm:space-y-3 mb-4 sm:mb-6 md:mb-8">
           <h1 className="text-xl sm:text-2xl md:text-4xl font-playfair font-medium tracking-tight">
@@ -33,7 +33,7 @@ export default function Index() {
           </p>
         </header>
 
-        <div className="grid md:grid-cols-[280px,1fr] lg:grid-cols-[320px,1fr] gap-4 md:gap-6 lg:gap-8 h-[calc(100%-100px)] sm:h-[calc(100%-120px)]">
+        <div className="grid md:grid-cols-[320px,1fr] lg:grid-cols-[380px,1fr] gap-4 md:gap-6 lg:gap-8 h-[calc(100%-100px)] sm:h-[calc(100%-120px)]">
           <div className="h-[300px] md:h-full">
             <ScrollArea className="h-full">
               <Controls
