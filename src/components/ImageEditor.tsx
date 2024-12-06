@@ -1,105 +1,95 @@
 import { forwardRef } from "react";
-import Draggable from "react-draggable";
-import type { Template } from "@/lib/templates";
-import { Card } from "@/components/ui/card";
-
-interface Pill {
-  id: number;
-  text: string;
-  font: string;
-  background: string;
-}
+import { cn } from "@/lib/utils";
 
 interface ImageEditorProps {
-  template: Template;
+  template: {
+    width: number;
+    height: number;
+  };
   background: string;
   jobTitle: string;
   jobTitleFont: string;
   jobTitleSize: string;
-  pills: Pill[];
+  pills: {
+    id: number;
+    text: string;
+    font: string;
+    background: string;
+  }[];
   logo: string | null;
 }
 
-export const ImageEditor = forwardRef<HTMLDivElement, ImageEditorProps>(({
-  template,
-  background,
-  jobTitle,
-  jobTitleFont,
-  jobTitleSize,
-  pills,
-  logo,
-}, ref) => {
-  const getBackgroundStyle = () => {
-    if (background.startsWith('linear-gradient')) {
-      return { backgroundImage: background };
-    }
-    return { backgroundColor: background };
-  };
+export const ImageEditor = forwardRef<HTMLDivElement, ImageEditorProps>(
+  (
+    {
+      template,
+      background,
+      jobTitle,
+      jobTitleFont,
+      jobTitleSize,
+      pills,
+      logo,
+    },
+    ref
+  ) => {
+    const isDarkBackground = background.includes("Nightshade") || 
+                           background.startsWith("#") && 
+                           (
+                             parseInt(background.slice(1), 16) < 0x808080 || 
+                             background.length === 4 && parseInt(background.slice(1), 16) < 0x888
+                           );
 
-  return (
-    <Card
-      ref={ref}
-      data-gradient-motion
-      className="relative mx-auto overflow-hidden bg-gradient-to-b from-white/80 to-transparent transition-all duration-300"
-      style={{
-        width: template.width,
-        height: template.height,
-        maxWidth: "100%",
-        maxHeight: "70vh",
-        ...getBackgroundStyle(),
-      }}
-    >
-      <div 
-        className="absolute inset-0"
+    return (
+      <div
+        ref={ref}
+        data-gradient-motion
+        className="w-full h-full relative"
         style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
-          opacity: 0.03,
-          mixBlendMode: 'overlay',
+          background,
         }}
-      />
-      <div className="absolute inset-0 p-8 flex flex-col items-center justify-center text-center">
-        {logo && (
-          <Draggable bounds="parent">
-            <img
-              src={logo}
-              alt="Company logo"
-              className="w-20 h-20 object-contain cursor-move"
-            />
-          </Draggable>
-        )}
-        
-        <Draggable bounds="parent">
-          <div className="cursor-move space-y-6">
-            <h1 
-              className="text-white font-medium leading-tight tracking-tight"
-              style={{ 
-                fontFamily: jobTitleFont,
-                fontSize: jobTitleSize === '3xl' ? '1.875rem' : 
-                         jobTitleSize === '4xl' ? '2.25rem' : '3rem'
-              }}
-            >
-              {jobTitle}
-            </h1>
-            
-            <div className="flex flex-wrap gap-3 justify-center">
-              {pills.map((pill) => (
-                <span
-                  key={pill.id}
-                  className="px-4 py-1.5 rounded-full backdrop-blur-sm text-sm font-medium text-white/90"
-                  style={{ 
-                    fontFamily: pill.font,
-                    backgroundColor: 'rgba(255, 255, 255, 0.1)'
-                  }}
-                >
-                  {pill.text}
-                </span>
-              ))}
+      >
+        <div className="absolute inset-0 flex flex-col items-center justify-center p-12">
+          {logo && (
+            <div className="mb-8">
+              <img src={logo} alt="Company logo" className="h-12 object-contain" />
             </div>
+          )}
+          <h1
+            className={cn(
+              "text-center tracking-tighter",
+              jobTitleFont === "Playfair Display" && "font-playfair",
+              jobTitleFont === "Archivo" && "font-archivo",
+              jobTitleFont === "Inter" && "font-inter",
+              jobTitleSize === "sm" && "text-2xl",
+              jobTitleSize === "base" && "text-3xl",
+              jobTitleSize === "lg" && "text-4xl",
+              jobTitleSize === "xl" && "text-5xl",
+              isDarkBackground ? "text-white" : "text-gray-900",
+              "tracking-tight"
+            )}
+          >
+            {jobTitle}
+          </h1>
+          <div className="flex flex-wrap gap-2 justify-center mt-6">
+            {pills.map((pill) => (
+              <div
+                key={pill.id}
+                className={cn(
+                  "px-4 py-1.5 rounded-full text-sm",
+                  pill.font === "Playfair Display" && "font-playfair",
+                  pill.font === "Archivo" && "font-archivo",
+                  pill.font === "Inter" && "font-inter",
+                  isDarkBackground ? "text-white bg-white/10" : "text-gray-900 bg-gray-100"
+                )}
+              >
+                {pill.text}
+              </div>
+            ))}
           </div>
-        </Draggable>
+        </div>
       </div>
-    </Card>
-  );
-});
+    );
+  }
+);
 
 ImageEditor.displayName = "ImageEditor";
