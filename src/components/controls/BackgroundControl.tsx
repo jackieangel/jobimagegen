@@ -4,7 +4,7 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Switch } from "@/components/ui/switch";
 import { Shuffle, RotateCcw } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Card } from "@/components/ui/card";
 
 interface BackgroundControlProps {
@@ -23,6 +23,17 @@ export function BackgroundControl({ background, setBackground }: BackgroundContr
     { name: "Sand", value: "linear-gradient(90deg, #F5F3F0 0%, #E8E2D9 100%)" },
     { name: "Mist", value: "linear-gradient(90deg, #EFF1F3 0%, #E2E6EA 100%)" },
   ];
+
+  useEffect(() => {
+    const editorElement = document.querySelector('[data-gradient-motion]');
+    if (editorElement) {
+      if (gradientMotion) {
+        editorElement.classList.add('gradient-motion');
+      } else {
+        editorElement.classList.remove('gradient-motion');
+      }
+    }
+  }, [gradientMotion]);
 
   const updateGradientAngle = (angle: string) => {
     if (!background.includes("gradient")) return;

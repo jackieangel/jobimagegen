@@ -39,6 +39,7 @@ export const ImageEditor = forwardRef<HTMLDivElement, ImageEditorProps>(({
   return (
     <Card
       ref={ref}
+      data-gradient-motion
       className="relative mx-auto overflow-hidden bg-gradient-to-b from-white/80 to-transparent transition-all duration-300"
       style={{
         width: template.width,
