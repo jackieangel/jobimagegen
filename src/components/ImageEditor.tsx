@@ -10,13 +10,18 @@ interface ImageEditorProps {
   jobTitle: string;
   jobTitleFont: string;
   jobTitleSize: string;
+  jobPosition: { x: number; y: number };
   pills: {
     id: number;
     text: string;
     font: string;
     background: string;
   }[];
+  pillsPosition: { x: number; y: number };
   logo: string | null;
+  logoPosition: { x: number; y: number };
+  logoColor: string;
+  logoScale: number;
   gradientMotion?: boolean;
 }
 
@@ -28,8 +33,13 @@ export const ImageEditor = forwardRef<HTMLDivElement, ImageEditorProps>(
       jobTitle,
       jobTitleFont,
       jobTitleSize,
+      jobPosition,
       pills,
+      pillsPosition,
       logo,
+      logoPosition,
+      logoColor,
+      logoScale,
       gradientMotion = false,
     },
     ref
@@ -67,46 +77,86 @@ export const ImageEditor = forwardRef<HTMLDivElement, ImageEditorProps>(
           background,
         }}
       >
-        <div className="absolute inset-0 flex flex-col items-center justify-center p-12">
+        <div className="absolute inset-0">
           {logo && (
-            <div className="mb-8">
-              <img src={logo} alt="Company logo" className="h-12 object-contain" />
+            <div 
+              className="absolute transition-all duration-200"
+              style={{
+                left: `${logoPosition.x}%`,
+                top: `${logoPosition.y}%`,
+                transform: 'translate(-50%, -50%)',
+              }}
+            >
+              <img 
+                src={logo} 
+                alt="Company logo" 
+                className="object-contain transition-all duration-200"
+                style={{
+                  height: `${48 * logoScale}px`,
+                  filter: logo.endsWith('.svg') ? `brightness(0) saturate(100%) ${logoColor === '#FFFFFF' ? 'invert(1)' : ''}` : 'none',
+                  color: logoColor
+                }}
+              />
             </div>
           )}
-          <h1
-            className={cn(
-              "text-center tracking-tighter",
-              jobTitleFont === "Playfair Display" && "font-playfair",
-              jobTitleFont === "Archivo" && "font-archivo",
-              jobTitleFont === "Inter" && "font-inter",
-              jobTitleSize === "sm" && "text-2xl",
-              jobTitleSize === "base" && "text-3xl",
-              jobTitleSize === "lg" && "text-4xl",
-              jobTitleSize === "xl" && "text-5xl",
-              isDarkTheme ? "text-white" : "text-gray-900",
-              "tracking-tight"
-            )}
+          
+          <div 
+            className="absolute transition-all duration-200"
             style={{
-              fontFamily: jobTitleFont
+              left: `${jobPosition.x}%`,
+              top: `${jobPosition.y}%`,
+              transform: 'translate(-50%, -50%)',
+              width: '100%',
+              padding: '0 2rem'
             }}
           >
-            {jobTitle}
-          </h1>
-          <div className="flex flex-wrap gap-2 justify-center mt-6">
-            {pills.map((pill) => (
-              <div
-                key={pill.id}
-                className={cn(
-                  "px-4 py-1.5 rounded-full text-sm transition-colors duration-200 hover:bg-opacity-90 font-inter"
-                )}
-                style={{
-                  background: pill.background,
-                  color: getTextColor(pill.background)
-                }}
-              >
-                {pill.text}
-              </div>
-            ))}
+            <h1
+              className={cn(
+                "text-center tracking-tighter",
+                jobTitleFont === "Playfair Display" && "font-playfair",
+                jobTitleFont === "Archivo" && "font-archivo",
+                jobTitleFont === "Inter" && "font-inter",
+                jobTitleSize === "sm" && "text-2xl",
+                jobTitleSize === "base" && "text-3xl",
+                jobTitleSize === "lg" && "text-4xl",
+                jobTitleSize === "xl" && "text-5xl",
+                isDarkTheme ? "text-white" : "text-gray-900",
+                "tracking-tight"
+              )}
+              style={{
+                fontFamily: jobTitleFont
+              }}
+            >
+              {jobTitle}
+            </h1>
+          </div>
+
+          <div 
+            className="absolute transition-all duration-200"
+            style={{
+              left: `${pillsPosition.x}%`,
+              top: `${pillsPosition.y}%`,
+              transform: 'translate(-50%, -50%)',
+              width: '100%',
+              padding: '0 2rem'
+            }}
+          >
+            <div className="flex flex-wrap gap-2 justify-center">
+              {pills.map((pill) => (
+                <div
+                  key={pill.id}
+                  className={cn(
+                    "px-4 py-1.5 rounded-full text-sm transition-colors duration-200 hover:bg-opacity-90 font-inter"
+                  )}
+                  style={{
+                    background: pill.background,
+                    color: getTextColor(pill.background)
+                  }}
+                >
+                  {pill.text}
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>

@@ -12,11 +12,16 @@ export default function Index() {
   const [jobTitle, setJobTitle] = useState("Design Chief of Staff");
   const [jobTitleFont, setJobTitleFont] = useState("Playfair Display");
   const [jobTitleSize, setJobTitleSize] = useState("base");
+  const [jobPosition, setJobPosition] = useState({ x: 50, y: 50 });
+  const [pillsPosition, setPillsPosition] = useState({ x: 50, y: 65 });
   const [pills, setPills] = useState([
     { id: 1, text: "PARIS / REMOTE", font: "Inter", background: "#f3f4f6" },
     { id: 2, text: "UX/UI DESIGN", font: "Inter", background: "#f3f4f6" },
   ]);
   const [logo, setLogo] = useState<string | null>(null);
+  const [logoPosition, setLogoPosition] = useState({ x: 50, y: 25 });
+  const [logoColor, setLogoColor] = useState("#000000");
+  const [logoScale, setLogoScale] = useState(1);
 
   const editorRef = useRef<HTMLDivElement>(null);
   const actionBarRef = useRef<HTMLDivElement>(null);
@@ -46,9 +51,19 @@ export default function Index() {
                 setJobTitleFont={setJobTitleFont}
                 jobTitleSize={jobTitleSize}
                 setJobTitleSize={setJobTitleSize}
+                jobPosition={jobPosition}
+                setJobPosition={setJobPosition}
                 pills={pills}
                 setPills={setPills}
+                pillsPosition={pillsPosition}
+                setPillsPosition={setPillsPosition}
                 setLogo={setLogo}
+                logoPosition={logoPosition}
+                setLogoPosition={setLogoPosition}
+                logoColor={logoColor}
+                setLogoColor={setLogoColor}
+                logoScale={logoScale}
+                setLogoScale={setLogoScale}
                 activeTemplate={activeTemplate}
                 setActiveTemplate={setActiveTemplate}
               />
@@ -84,8 +99,13 @@ export default function Index() {
                           jobTitle={jobTitle}
                           jobTitleFont={jobTitleFont}
                           jobTitleSize={jobTitleSize}
+                          jobPosition={jobPosition}
                           pills={pills}
+                          pillsPosition={pillsPosition}
                           logo={logo}
+                          logoPosition={logoPosition}
+                          logoColor={logoColor}
+                          logoScale={logoScale}
                         />
                       </div>
                     </div>
