@@ -18,13 +18,12 @@ interface TagsControlProps {
   setPills: (pills: Pill[]) => void;
 }
 
-const fontOptions = ["Playfair Display", "Inter", "Arial", "Georgia", "Times New Roman"];
 const backgroundOptions = [
-  { label: "Light Gray", value: "#f3f4f6" },
-  { label: "Light Blue", value: "#e0f2fe" },
-  { label: "Light Green", value: "#dcfce7" },
-  { label: "Light Purple", value: "#f3e8ff" },
-  { label: "Light Pink", value: "#fce7f3" },
+  { label: "Light Gray", value: "rgba(243, 244, 246, 0.8)" },
+  { label: "Light Blue", value: "rgba(224, 242, 254, 0.8)" },
+  { label: "Light Green", value: "rgba(220, 252, 231, 0.8)" },
+  { label: "Light Purple", value: "rgba(243, 232, 255, 0.8)" },
+  { label: "Light Pink", value: "rgba(252, 231, 243, 0.8)" },
 ];
 
 export function TagsControl({ pills, setPills }: TagsControlProps) {
@@ -33,7 +32,12 @@ export function TagsControl({ pills, setPills }: TagsControlProps) {
       toast.error("Maximum of 4 tags allowed");
       return;
     }
-    setPills([...pills, { id: Date.now(), text: "New Tag", font: "Inter", background: "#f3f4f6" }]);
+    setPills([...pills, { 
+      id: Date.now(), 
+      text: "New Tag", 
+      font: "Inter", 
+      background: backgroundOptions[0].value 
+    }]);
   };
 
   const removePill = (id: number) => {
@@ -43,12 +47,6 @@ export function TagsControl({ pills, setPills }: TagsControlProps) {
   const updatePill = (id: number, text: string) => {
     setPills(pills.map(pill => 
       pill.id === id ? { ...pill, text } : pill
-    ));
-  };
-
-  const updatePillFont = (id: number, font: string) => {
-    setPills(pills.map(pill => 
-      pill.id === id ? { ...pill, font } : pill
     ));
   };
 
@@ -102,19 +100,7 @@ export function TagsControl({ pills, setPills }: TagsControlProps) {
               </Button>
             </div>
 
-            <div className="grid grid-cols-2 gap-2">
-              <Select value={pill.font} onValueChange={(font) => updatePillFont(pill.id, font)}>
-                <SelectTrigger>
-                  <SelectValue placeholder="Font" />
-                </SelectTrigger>
-                <SelectContent>
-                  {fontOptions.map(font => (
-                    <SelectItem key={font} value={font}>
-                      {font}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
+            <div>
               <Select 
                 value={pill.background} 
                 onValueChange={(bg) => updatePillBackground(pill.id, bg)}

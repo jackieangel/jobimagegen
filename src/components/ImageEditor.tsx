@@ -77,14 +77,12 @@ export const ImageEditor = forwardRef<HTMLDivElement, ImageEditorProps>(
               <div
                 key={pill.id}
                 className={cn(
-                  "px-4 py-1.5 rounded-full text-sm transition-colors duration-200 hover:bg-opacity-90",
-                  pill.font === "Playfair Display" && "font-playfair",
-                  pill.font === "Archivo" && "font-archivo",
-                  pill.font === "Inter" && "font-inter",
-                  isDarkBackground ? "text-white bg-white/10 hover:bg-white/15" : "text-gray-900 bg-black/5 hover:bg-black/10"
+                  "px-4 py-1.5 rounded-full text-sm transition-colors duration-200 hover:bg-opacity-90 font-inter",
+                  isDarkBackground ? "text-white" : "text-gray-900"
                 )}
                 style={{
-                  background: isDarkBackground ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.05)',
+                  background: pill.background,
+                  color: isDarkBackground ? '#fff' : '#1a1a1a'
                 }}
               >
                 {pill.text}
