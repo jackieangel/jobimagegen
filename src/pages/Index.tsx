@@ -55,20 +55,22 @@ export default function Index() {
           </div>
 
           <Card className="p-3 sm:p-4 md:p-6 bg-accent">
-            <div className="sticky top-6 h-full">
-              <div className="w-full h-full flex flex-col items-center justify-center gap-4">
+            <div className="sticky top-6">
+              <div className="w-full flex flex-col items-center justify-center gap-4">
                 <p className="text-sm text-muted-foreground">
                   Template Aspect Ratio: {aspectRatio}
                 </p>
                 <div className="w-full flex items-center justify-center">
-                  <div 
-                    className="relative w-full max-w-[600px] h-[600px] transition-all duration-300 bg-card shadow-sm mx-auto flex items-center justify-center"
-                  >
+                  <div className="relative w-[600px] h-[600px] bg-card shadow-sm flex items-center justify-center">
                     <div 
-                      className="relative transition-all duration-300"
+                      className="absolute"
                       style={{
-                        width: `${Math.min(600, template.width)}px`,
-                        height: `${Math.min(600 * (template.height / template.width), 600)}px`,
+                        width: template.width > template.height 
+                          ? '600px' 
+                          : `${(template.width / template.height) * 600}px`,
+                        height: template.height > template.width 
+                          ? '600px' 
+                          : `${(template.height / template.width) * 600}px`,
                       }}
                     >
                       <ImageEditor
