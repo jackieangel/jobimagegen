@@ -53,17 +53,24 @@ export function ImageEditor({
     }
   };
 
+  const getBackgroundStyle = () => {
+    if (background.startsWith('linear-gradient')) {
+      return { backgroundImage: background };
+    }
+    return { backgroundColor: background };
+  };
+
   return (
     <div className="space-y-4 w-full">
       <div
         ref={editorRef}
-        className="relative mx-auto overflow-hidden bg-gradient-to-b from-white/80 to-transparent"
+        className="relative mx-auto overflow-hidden bg-gradient-to-b from-white/80 to-transparent transition-all duration-300"
         style={{
           width: template.width,
           height: template.height,
-          backgroundColor: background,
           maxWidth: "100%",
           maxHeight: "70vh",
+          ...getBackgroundStyle(),
         }}
       >
         <div className="absolute inset-0 p-8 flex flex-col items-center justify-center text-center">
