@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Download, Share2, Instagram, Linkedin } from "lucide-react";
 import type { Template } from "@/lib/templates";
 import GIF from 'gif.js';
+import { checkExportLimit } from "@/lib/rateLimit";
 
 interface ImageActionsProps {
   editorRef: React.RefObject<HTMLDivElement>;
@@ -16,6 +17,13 @@ export function ImageActions({ editorRef, template }: ImageActionsProps) {
     if (!editorRef.current) return;
 
     try {
+      // Check export limit
+      const canExport = await checkExportLimit();
+      if (!canExport) {
+        toast.error("You've reached your weekly export limit. Please upgrade your license to continue.");
+        return;
+      }
+
       // Check if the element has the gradient-motion class
       const hasMotion = editorRef.current.querySelector('.gradient-motion');
       
@@ -73,6 +81,13 @@ export function ImageActions({ editorRef, template }: ImageActionsProps) {
     if (!editorRef.current) return;
 
     try {
+      // Check export limit
+      const canExport = await checkExportLimit();
+      if (!canExport) {
+        toast.error("You've reached your weekly sharing limit. Please upgrade your license to continue.");
+        return;
+      }
+
       const hasMotion = editorRef.current.querySelector('.gradient-motion');
       let blob: Blob;
 
