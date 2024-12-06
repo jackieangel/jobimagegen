@@ -56,34 +56,32 @@ export default function Index() {
               <div className="sticky top-0">
                 <div className="w-full flex flex-col items-center justify-center gap-4">
                   <div className="w-full flex items-center justify-center">
-                    <div className="relative w-[600px] h-[600px] bg-card shadow-sm flex items-center justify-center">
-                      <div 
-                        className="absolute"
-                        style={{
-                          width: template.width > template.height 
-                            ? '600px' 
-                            : `${(template.width / template.height) * 600}px`,
-                          height: template.height > template.width 
-                            ? '600px' 
-                            : `${(template.height / template.width) * 600}px`,
-                          top: activeTemplate === 'linkedin-post' ? '0' : '50%',
-                          left: '50%',
-                          transform: activeTemplate === 'linkedin-post' 
-                            ? 'translateX(-50%)' 
-                            : 'translate(-50%, -50%)',
-                        }}
-                      >
-                        <ImageEditor
-                          ref={editorRef}
-                          template={template}
-                          background={background}
-                          jobTitle={jobTitle}
-                          jobTitleFont={jobTitleFont}
-                          jobTitleSize={jobTitleSize}
-                          pills={pills}
-                          logo={logo}
-                        />
-                      </div>
+                    <div 
+                      className="relative w-full h-full bg-card shadow-sm flex items-center justify-center"
+                      style={{
+                        width: template.width > template.height 
+                          ? '600px' 
+                          : `${(template.width / template.height) * 600}px`,
+                        height: template.height > template.width 
+                          ? '600px' 
+                          : `${(template.height / template.width) * 600}px`,
+                        top: activeTemplate === 'linkedin-post' ? '0' : '50%',
+                        left: '50%',
+                        transform: activeTemplate === 'linkedin-post' 
+                          ? 'translateX(-50%)' 
+                          : 'translate(-50%, -50%)',
+                      }}
+                    >
+                      <ImageEditor
+                        ref={editorRef}
+                        template={template}
+                        background={background}
+                        jobTitle={jobTitle}
+                        jobTitleFont={jobTitleFont}
+                        jobTitleSize={jobTitleSize}
+                        pills={pills}
+                        logo={logo}
+                      />
                     </div>
                   </div>
                 </div>
