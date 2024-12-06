@@ -15,6 +15,20 @@ export default function Index() {
   ]);
   const [logo, setLogo] = useState<string | null>(null);
 
+  // Calculate preview dimensions while maintaining aspect ratio
+  const template = templates[activeTemplate];
+  const maxPreviewWidth = 600; // Maximum width for the preview
+  const maxPreviewHeight = 600; // Maximum height for the preview
+  const aspectRatio = template.width / template.height;
+  
+  let previewWidth = Math.min(maxPreviewWidth, template.width);
+  let previewHeight = previewWidth / aspectRatio;
+  
+  if (previewHeight > maxPreviewHeight) {
+    previewHeight = maxPreviewHeight;
+    previewWidth = previewHeight * aspectRatio;
+  }
+
   return (
     <div className="min-h-screen p-4 sm:p-6 bg-gradient-to-b from-slate-50 to-white">
       <div className="max-w-[1400px] mx-auto space-y-6 animate-fade-in">
@@ -31,9 +45,16 @@ export default function Index() {
         <div className="grid lg:grid-cols-[1fr,380px] gap-6">
           <div className="relative">
             <div className="sticky top-6">
-              <div className="p-4 sm:p-6 flex items-center justify-center bg-white/50 backdrop-blur-sm rounded-lg border border-slate-200/50 shadow-sm transition-all duration-300">
+              <div 
+                className="flex items-center justify-center bg-white/50 backdrop-blur-sm rounded-lg border border-slate-200/50 shadow-sm transition-all duration-300"
+                style={{
+                  width: `${previewWidth}px`,
+                  height: `${previewHeight}px`,
+                  margin: '0 auto'
+                }}
+              >
                 <ImageEditor
-                  template={templates[activeTemplate]}
+                  template={template}
                   background={background === "none" ? "#ffffff" : background}
                   jobTitle={jobTitle}
                   jobTitleFont={jobTitleFont}
