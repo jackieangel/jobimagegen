@@ -60,21 +60,28 @@ export default function Index() {
                 <p className="text-sm text-muted-foreground">
                   Template Aspect Ratio: {aspectRatio}
                 </p>
-                <div 
-                  className="relative w-full max-w-[600px] transition-all duration-300 bg-card shadow-sm mx-auto"
-                  style={{
-                    aspectRatio: template.width / template.height,
-                  }}
-                >
-                  <ImageEditor
-                    template={template}
-                    background={background}
-                    jobTitle={jobTitle}
-                    jobTitleFont={jobTitleFont}
-                    jobTitleSize={jobTitleSize}
-                    pills={pills}
-                    logo={logo}
-                  />
+                <div className="w-full flex items-center justify-center">
+                  <div 
+                    className="relative w-full max-w-[600px] h-[600px] transition-all duration-300 bg-card shadow-sm mx-auto flex items-center justify-center"
+                  >
+                    <div 
+                      className="relative transition-all duration-300"
+                      style={{
+                        width: `${Math.min(600, template.width)}px`,
+                        height: `${Math.min(600 * (template.height / template.width), 600)}px`,
+                      }}
+                    >
+                      <ImageEditor
+                        template={template}
+                        background={background}
+                        jobTitle={jobTitle}
+                        jobTitleFont={jobTitleFont}
+                        jobTitleSize={jobTitleSize}
+                        pills={pills}
+                        logo={logo}
+                      />
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
