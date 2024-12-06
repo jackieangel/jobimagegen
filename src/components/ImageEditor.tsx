@@ -83,6 +83,9 @@ export const ImageEditor = forwardRef<HTMLDivElement, ImageEditorProps>(
               isDarkTheme ? "text-white" : "text-gray-900",
               "tracking-tight"
             )}
+            style={{
+              fontFamily: jobTitleFont
+            }}
           >
             {jobTitle}
           </h1>

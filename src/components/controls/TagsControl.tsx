@@ -29,8 +29,8 @@ const lightThemeColors = [
 
 const darkThemeColors = [
   { label: "Dark Gray", value: "rgba(255, 255, 255, 0.15)" },
-  { label: "Dark Blue", value: "rgba(30, 58, 138, 0.9)" }, // Updated dark blue
-  { label: "Dark Purple", value: "rgba(88, 28, 135, 0.9)" }, // Updated dark purple
+  { label: "Dark Blue", value: "rgba(30, 58, 138, 0.9)" },
+  { label: "Dark Purple", value: "rgba(88, 28, 135, 0.9)" },
 ];
 
 const defaultLightThemeColor = "rgba(243, 244, 246, 0.8)"; // Light Gray
@@ -45,9 +45,6 @@ export function TagsControl({ pills, setPills, background }: TagsControlProps) {
       background.includes("hsl(250, 25%, 10%)") // Nightshade
     );
 
-  const backgroundOptions = isDarkTheme ? darkThemeColors : lightThemeColors;
-  const defaultTagColor = isDarkTheme ? defaultDarkThemeColor : defaultLightThemeColor;
-
   const addPill = () => {
     if (pills.length >= 4) {
       toast.error("Maximum of 4 tags allowed");
@@ -57,7 +54,7 @@ export function TagsControl({ pills, setPills, background }: TagsControlProps) {
       id: Date.now(), 
       text: "New Tag", 
       font: "Inter", 
-      background: defaultTagColor
+      background: isDarkTheme ? defaultDarkThemeColor : defaultLightThemeColor
     }]);
   };
 
@@ -130,7 +127,7 @@ export function TagsControl({ pills, setPills, background }: TagsControlProps) {
                   <SelectValue placeholder="Background" />
                 </SelectTrigger>
                 <SelectContent>
-                  {backgroundOptions.map(bg => (
+                  {(isDarkTheme ? darkThemeColors : lightThemeColors).map(bg => (
                     <SelectItem key={bg.value} value={bg.value}>
                       {bg.label}
                     </SelectItem>
