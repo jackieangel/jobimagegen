@@ -2,10 +2,16 @@ import { useRef } from "react";
 import { toPng } from "html-to-image";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
-import { Download, Share2, Instagram, Linkedin } from "lucide-react";
+import { Download, Share2, Instagram, Linkedin, Key } from "lucide-react";
 import type { Template } from "@/lib/templates";
 import GIF from 'gif.js';
 import { checkExportLimit } from "@/lib/rateLimit";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 interface ImageActionsProps {
   editorRef: React.RefObject<HTMLDivElement>;
@@ -13,21 +19,18 @@ interface ImageActionsProps {
 }
 
 export function ImageActions({ editorRef, template }: ImageActionsProps) {
-  const handleExport = async () => {
+  const handleExport = async (type: 'png' | 'gif') => {
     if (!editorRef.current) return;
 
     try {
       // Check export limit
       const canExport = await checkExportLimit();
       if (!canExport) {
-        toast.error("You've reached your export limit. Please upgrade your license to continue.");
+        toast.error("You've reached your export limit.");
         return;
       }
 
-      // Check if the element has the gradient-motion class
-      const hasMotion = editorRef.current.querySelector('.gradient-motion');
-      
-      if (hasMotion) {
+      if (type === 'gif') {
         // Create GIF
         const gif = new GIF({
           workers: 2,
@@ -84,7 +87,7 @@ export function ImageActions({ editorRef, template }: ImageActionsProps) {
       // Check export limit
       const canExport = await checkExportLimit();
       if (!canExport) {
-        toast.error("You've reached your sharing limit. Please upgrade your license to continue.");
+        toast.error("You've reached your sharing limit.");
         return;
       }
 
@@ -154,16 +157,40 @@ export function ImageActions({ editorRef, template }: ImageActionsProps) {
     }
   };
 
+  const hasMotion = editorRef.current?.querySelector('.gradient-motion');
+
   return (
     <>
-      <Button 
-        onClick={handleExport} 
-        className="rounded-full bg-black hover:bg-black/90 text-white shadow-sm px-3"
-        size="sm"
-      >
-        <Download className="w-4 h-4 mr-1.5" />
-        Export
-      </Button>
+      {hasMotion ? (
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button 
+              className="rounded-full bg-black hover:bg-black/90 text-white shadow-sm px-3"
+              size="sm"
+            >
+              <Download className="w-4 h-4 mr-1.5" />
+              Export as
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent>
+            <DropdownMenuItem onClick={() => handleExport('png')}>
+              Export .PNG
+            </DropdownMenuItem>
+            <DropdownMenuItem onClick={() => handleExport('gif')}>
+              Export .GIF
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      ) : (
+        <Button 
+          onClick={() => handleExport('png')} 
+          className="rounded-full bg-black hover:bg-black/90 text-white shadow-sm px-3"
+          size="sm"
+        >
+          <Download className="w-4 h-4 mr-1.5" />
+          Export .PNG
+        </Button>
+      )}
 
       {template.name === 'instagram-story' ? (
         <Button
@@ -193,6 +220,15 @@ export function ImageActions({ editorRef, template }: ImageActionsProps) {
           Share
         </Button>
       )}
+
+      <Button
+        onClick={() => window.open('https://lovable.dev/pricing', '_blank')}
+        className="rounded-full bg-black hover:bg-black/90 text-white shadow-sm px-3"
+        size="sm"
+      >
+        <Key className="w-4 h-4 mr-1.5" />
+        Get License
+      </Button>
     </>
   );
 }
