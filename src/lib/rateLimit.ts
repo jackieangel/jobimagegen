@@ -1,7 +1,7 @@
-import { setupLemonSqueezy, getLicenseKey } from '@lemonsqueezy/lemonsqueezy.js';
+import { createClient, LemonSqueezy } from '@lemonsqueezy/lemonsqueezy.js';
 
 // Initialize Lemon Squeezy with your API key
-setupLemonSqueezy('YOUR_API_KEY');
+const ls: LemonSqueezy = createClient('YOUR_API_KEY');
 
 interface ExportLog {
   lastExport: number;
@@ -13,15 +13,15 @@ const WEEK_IN_MS = 7 * 24 * 60 * 60 * 1000;
 
 export const checkExportLimit = async (): Promise<boolean> => {
   try {
-    // Get the license key from localStorage (you'll need to implement this part)
+    // Get the license key from localStorage
     const licenseKey = localStorage.getItem('lemonSqueezyLicense');
     if (!licenseKey) {
       throw new Error('No license key found');
     }
 
     // Validate license with Lemon Squeezy
-    const license = await getLicenseKey(licenseKey);
-    if (!license.valid) {
+    const response = await ls.getLicenseKey(licenseKey);
+    if (response.statusCode !== 200 || response.error) {
       throw new Error('Invalid license');
     }
 
