@@ -36,7 +36,7 @@ export function TagsControl({ pills, setPills }: TagsControlProps) {
       id: Date.now(), 
       text: "New Tag", 
       font: "Inter", 
-      background: backgroundOptions[0].value 
+      background: "rgba(243, 244, 246, 0.8)" // Set default to Light Gray
     }]);
   };
 
