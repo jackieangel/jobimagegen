@@ -19,29 +19,32 @@ export default function Index() {
   const template = templates[activeTemplate];
 
   return (
-    <div className="min-h-screen bg-background">
-      <div className="container mx-auto px-4 py-6 md:py-12 max-w-[1400px] animate-fade-in">
-        <header className="text-center space-y-4 mb-8 md:mb-12">
-          <h1 className="text-3xl md:text-5xl font-playfair font-medium tracking-tight text-foreground">
+    <div className="min-h-[1000px] max-h-[1000px] max-w-[1000px] mx-auto bg-background overflow-hidden">
+      <div className="container h-full px-4 py-6 md:py-8">
+        <header className="text-center space-y-3 mb-6 md:mb-8">
+          <h1 className="text-2xl md:text-4xl font-playfair font-medium tracking-tight text-foreground">
             Job Post Image Generator
           </h1>
-          <p className="text-sm md:text-base text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-xs md:text-sm text-muted-foreground max-w-2xl mx-auto">
             Create beautiful job posting images for social media in seconds. Choose your template,
             customize your design, and export your image.
           </p>
         </header>
 
-        <div className="grid lg:grid-cols-[1fr,380px] gap-6 md:gap-12">
+        <div className="grid lg:grid-cols-[1fr,320px] gap-4 md:gap-8 h-[calc(100%-120px)]">
           <div className="order-2 lg:order-1">
-            <div className="sticky top-6">
-              <div className="h-[500px] md:h-[600px] flex items-center justify-center bg-card/50 backdrop-blur-sm border border-border/50">
+            <div className="sticky top-6 h-full">
+              {/* Outer wrapper with fixed dimensions and background */}
+              <div className="w-full h-full bg-slate-50 flex items-center justify-center p-6">
+                {/* Inner wrapper that adapts to template size */}
                 <div 
-                  className="transition-all duration-300"
+                  className="relative transition-all duration-300 bg-white shadow-sm"
                   style={{
                     width: `${template.width}px`,
                     height: `${template.height}px`,
                     maxWidth: '100%',
-                    maxHeight: '70vh',
+                    maxHeight: '100%',
+                    aspectRatio: `${template.width} / ${template.height}`,
                   }}
                 >
                   <ImageEditor
@@ -58,8 +61,8 @@ export default function Index() {
             </div>
           </div>
 
-          <div className="order-1 lg:order-2">
-            <ScrollArea className="h-[calc(100vh-12rem)]">
+          <div className="order-1 lg:order-2 h-full">
+            <ScrollArea className="h-full pr-4">
               <Controls
                 background={background}
                 setBackground={setBackground}
