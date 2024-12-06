@@ -158,7 +158,7 @@ export function ImageActions({ editorRef, template }: ImageActionsProps) {
     <>
       <Button 
         onClick={handleExport} 
-        className="rounded-full bg-primary/90 hover:bg-primary/95 text-primary-foreground shadow-sm px-3"
+        className="rounded-full bg-black hover:bg-black/90 text-white shadow-sm px-3"
         size="sm"
       >
         <Download className="w-4 h-4 mr-1.5" />
@@ -168,7 +168,7 @@ export function ImageActions({ editorRef, template }: ImageActionsProps) {
       {template.name === 'instagram-story' ? (
         <Button
           onClick={handleShare}
-          className="rounded-full bg-primary/90 hover:bg-primary/95 text-primary-foreground shadow-sm px-3"
+          className="rounded-full bg-black hover:bg-black/90 text-white shadow-sm px-3"
           size="sm"
         >
           <Instagram className="w-4 h-4 mr-1.5" />
@@ -177,7 +177,7 @@ export function ImageActions({ editorRef, template }: ImageActionsProps) {
       ) : template.name === 'linkedin-post' ? (
         <Button
           onClick={handleShare}
-          className="rounded-full bg-primary/90 hover:bg-primary/95 text-primary-foreground shadow-sm px-3"
+          className="rounded-full bg-black hover:bg-black/90 text-white shadow-sm px-3"
           size="sm"
         >
           <Linkedin className="w-4 h-4 mr-1.5" />
@@ -186,7 +186,7 @@ export function ImageActions({ editorRef, template }: ImageActionsProps) {
       ) : (
         <Button
           onClick={handleShare}
-          className="rounded-full bg-primary/90 hover:bg-primary/95 text-primary-foreground shadow-sm px-3"
+          className="rounded-full bg-black hover:bg-black/90 text-white shadow-sm px-3"
           size="sm"
         >
           <Share2 className="w-4 h-4 mr-1.5" />

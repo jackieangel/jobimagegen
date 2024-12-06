@@ -87,7 +87,7 @@ export default function Index() {
         </div>
 
         <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50">
-          <div className="bg-black/85 backdrop-blur-xl border border-white/10 rounded-full shadow-2xl p-2 flex items-center justify-center gap-2 max-w-fit mx-auto">
+          <div className="bg-white backdrop-blur-xl border border-white/10 rounded-full shadow-2xl p-2 flex items-center justify-center gap-2 max-w-fit mx-auto">
             <ImageActions editorRef={editorRef} template={template} />
           </div>
         </div>
