@@ -99,7 +99,7 @@ export const ImageEditor = forwardRef<HTMLDivElement, ImageEditorProps>(
               bounds="parent"
             >
               <div 
-                className="absolute cursor-move transition-all duration-200 hover:scale-105"
+                className="absolute cursor-move transition-transform duration-200 hover:scale-105"
                 style={{
                   transform: 'translate(-50%, -50%)',
                 }}
@@ -107,14 +107,15 @@ export const ImageEditor = forwardRef<HTMLDivElement, ImageEditorProps>(
                 <img 
                   src={logo} 
                   alt="Company logo" 
-                  className="object-contain transition-all duration-200"
+                  className="object-contain transition-transform duration-200"
                   style={{
-                    height: '32px',
-                    maxWidth: '120px',
+                    height: '28px',
+                    maxWidth: '100px',
                     filter: logo.endsWith('.svg') ? `brightness(0) saturate(100%) ${logoColor === '#FFFFFF' ? 'invert(1)' : ''}` : 'none',
                     color: logoColor,
                     willChange: 'transform',
                     touchAction: 'none',
+                    userSelect: 'none',
                   }}
                 />
               </div>
