@@ -3,6 +3,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { useState, useEffect } from "react";
 import { GradientControls } from "./background/GradientControls";
 import { SolidColorControls } from "./background/SolidColorControls";
+import { Card } from "@/components/ui/card";
 
 interface BackgroundControlProps {
   background: string;
@@ -64,43 +65,46 @@ export function BackgroundControl({ background, setBackground, onThemeChange }: 
   }, [background]);
 
   return (
-    <div className="space-y-4 dark">
-      <div className="space-y-2">
-        <Label>Background Color</Label>
-        <div className="flex gap-2">
-          <Select 
-            value={background}
-            onValueChange={handleBackgroundChange}
-          >
-            <SelectTrigger className="flex-1">
-              <SelectValue placeholder="Select a background color..." />
-            </SelectTrigger>
-            <SelectContent>
-              {gradients.map((gradient) => (
-                <SelectItem key={gradient.name} value={gradient.value}>
-                  {gradient.name}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        </div>
+    <div className="space-y-4">
+      <div className="flex items-center justify-between">
+        <Label className="flex items-center gap-2">
+          Background
+        </Label>
       </div>
 
-      {background.includes("gradient") ? (
-        <GradientControls
-          background={background}
-          setBackground={setBackground}
-          gradientAngle={gradientAngle}
-          setGradientAngle={setGradientAngle}
-          gradientMotion={gradientMotion}
-          setGradientMotion={setGradientMotion}
-        />
-      ) : (
-        <SolidColorControls
-          background={background}
-          handleColorChange={handleColorChange}
-        />
-      )}
+      <Card className="p-4 space-y-4">
+        <Select 
+          value={background}
+          onValueChange={handleBackgroundChange}
+        >
+          <SelectTrigger>
+            <SelectValue placeholder="Select a background style..." />
+          </SelectTrigger>
+          <SelectContent>
+            {gradients.map((gradient) => (
+              <SelectItem key={gradient.name} value={gradient.value}>
+                {gradient.name}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+
+        {background.includes("gradient") ? (
+          <GradientControls
+            background={background}
+            setBackground={setBackground}
+            gradientAngle={gradientAngle}
+            setGradientAngle={setGradientAngle}
+            gradientMotion={gradientMotion}
+            setGradientMotion={setGradientMotion}
+          />
+        ) : (
+          <SolidColorControls
+            background={background}
+            handleColorChange={handleColorChange}
+          />
+        )}
+      </Card>
     </div>
   );
 }
