@@ -2,7 +2,7 @@ import { useRef } from "react";
 import Draggable from "react-draggable";
 import { Button } from "@/components/ui/button";
 import { toPng } from "html-to-image";
-import { Download } from "lucide-react";
+import { Download, Share2, Instagram, Linkedin } from "lucide-react";
 import { toast } from "sonner";
 import type { Template } from "@/lib/templates";
 import { Card } from "@/components/ui/card";
@@ -52,6 +52,45 @@ export function ImageEditor({
       toast.success("Image downloaded successfully!");
     } catch (err) {
       toast.error("Failed to export image. Please try again.");
+    }
+  };
+
+  const handleShare = async () => {
+    if (!editorRef.current) return;
+
+    try {
+      const dataUrl = await toPng(editorRef.current, {
+        quality: 1.0,
+        pixelRatio: 2,
+      });
+
+      // Convert base64 to blob
+      const response = await fetch(dataUrl);
+      const blob = await response.blob();
+      
+      if (template.name === "Instagram Story") {
+        // Check if Instagram sharing is available
+        if (navigator.share) {
+          await navigator.share({
+            files: [new File([blob], 'story.png', { type: 'image/png' })],
+          });
+        } else {
+          toast.error("Instagram sharing is not supported on this device");
+        }
+      } else if (template.name === "LinkedIn Post") {
+        window.open('https://www.linkedin.com/sharing/share-offsite/', '_blank');
+      } else {
+        // Default sharing
+        if (navigator.share) {
+          await navigator.share({
+            files: [new File([blob], 'image.png', { type: 'image/png' })],
+          });
+        } else {
+          toast.error("Sharing is not supported on this device");
+        }
+      }
+    } catch (err) {
+      toast.error("Failed to share image. Please try again.");
     }
   };
 
@@ -126,15 +165,6 @@ export function ImageEditor({
           </Draggable>
         </div>
       </Card>
-
-      <Button
-        onClick={handleExport}
-        className="w-full sm:w-auto"
-        size="lg"
-      >
-        <Download className="w-4 h-4 mr-2" />
-        Export Image
-      </Button>
     </div>
   );
 }
