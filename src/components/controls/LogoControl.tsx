@@ -8,6 +8,8 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 
 interface LogoControlProps {
   setLogo: (value: string | null) => void;
+  logoPosition: { x: number; y: number };
+  setLogoPosition: (position: { x: number; y: number }) => void;
   logoColor: string;
   setLogoColor: (color: string) => void;
   logoScale: number;
@@ -16,6 +18,8 @@ interface LogoControlProps {
 
 export function LogoControl({ 
   setLogo, 
+  logoPosition,
+  setLogoPosition,
   logoColor,
   setLogoColor,
   logoScale,

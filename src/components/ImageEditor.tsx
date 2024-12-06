@@ -1,4 +1,4 @@
-import { forwardRef } from "react";
+import { forwardRef, type ForwardedRef } from "react";
 import { cn } from "@/lib/utils";
 import Draggable from "react-draggable";
 
@@ -28,8 +28,8 @@ interface ImageEditorProps {
 }
 
 export const ImageEditor = forwardRef<HTMLDivElement, ImageEditorProps>(
-  (
-    {
+  (props, ref: ForwardedRef<HTMLDivElement>) => {
+    const {
       template,
       background,
       jobTitle,
@@ -44,9 +44,8 @@ export const ImageEditor = forwardRef<HTMLDivElement, ImageEditorProps>(
       logoScale,
       setLogoPosition,
       gradientMotion = false,
-    },
-    ref
-  ) => {
+    } = props;
+
     const isDarkTheme = 
       background.includes("Cedar") || 
       background.includes("Nightshade") ||
@@ -68,8 +67,8 @@ export const ImageEditor = forwardRef<HTMLDivElement, ImageEditorProps>(
     const isGradient = background.toLowerCase().includes("linear-gradient");
 
     const handleDrag = (_: any, data: { x: number; y: number }) => {
-      if (setLogoPosition) {
-        const containerRect = ref?.current?.getBoundingClientRect();
+      if (setLogoPosition && ref && 'current' in ref && ref.current) {
+        const containerRect = ref.current.getBoundingClientRect();
         if (containerRect) {
           const x = (data.x / containerRect.width) * 100;
           const y = (data.y / containerRect.height) * 100;
@@ -95,8 +94,8 @@ export const ImageEditor = forwardRef<HTMLDivElement, ImageEditorProps>(
           {logo && (
             <Draggable
               position={{
-                x: (logoPosition.x / 100) * (ref?.current?.clientWidth || 0),
-                y: (logoPosition.y / 100) * (ref?.current?.clientHeight || 0),
+                x: (logoPosition.x / 100) * ((ref && 'current' in ref && ref.current?.clientWidth) || 0),
+                y: (logoPosition.y / 100) * ((ref && 'current' in ref && ref.current?.clientHeight) || 0),
               }}
               onDrag={handleDrag}
               bounds="parent"
