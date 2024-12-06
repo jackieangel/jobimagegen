@@ -33,6 +33,7 @@ export const ImageEditor = forwardRef<HTMLDivElement, ImageEditorProps>(
     ref
   ) => {
     const isDarkBackground = background.includes("Nightshade") || 
+                           background.includes("hsl(250, 25%, 10%)") ||
                            background.startsWith("#") && 
                            (
                              parseInt(background.slice(1), 16) < 0x808080 || 
@@ -79,8 +80,11 @@ export const ImageEditor = forwardRef<HTMLDivElement, ImageEditorProps>(
                   pill.font === "Playfair Display" && "font-playfair",
                   pill.font === "Archivo" && "font-archivo",
                   pill.font === "Inter" && "font-inter",
-                  isDarkBackground ? "text-white bg-white/10" : "text-gray-900 bg-gray-100"
+                  isDarkBackground ? "text-white bg-white/10" : "text-gray-900 bg-black/5"
                 )}
+                style={{
+                  background: isDarkBackground ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.05)',
+                }}
               >
                 {pill.text}
               </div>
