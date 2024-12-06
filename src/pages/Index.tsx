@@ -11,7 +11,7 @@ export default function Index() {
   const [background, setBackground] = useState("linear-gradient(90deg, #E3E6E3 0%, #CBD5CD 100%)");
   const [jobTitle, setJobTitle] = useState("Design Chief of Staff");
   const [jobTitleFont, setJobTitleFont] = useState("Playfair Display");
-  const [jobTitleSize, setJobTitleSize] = useState("4xl");
+  const [jobTitleSize, setJobTitleSize] = useState("base");
   const [pills, setPills] = useState([
     { id: 1, text: "PARIS / REMOTE", font: "Inter", background: "#f3f4f6" },
     { id: 2, text: "UX/UI DESIGN", font: "Inter", background: "#f3f4f6" },
