@@ -223,7 +223,7 @@ export function ImageActions({ editorRef, template, onRateLimit }: ImageActionsP
       )}
 
       <Button
-        onClick={() => window.open('https://lovable.dev/pricing', '_blank')}
+        onClick={() => window.open('https://lovable.lemonsqueezy.com/checkout', '_blank')}
         className="rounded-full bg-black hover:bg-black/90 text-white shadow-sm px-3"
         size="sm"
       >
