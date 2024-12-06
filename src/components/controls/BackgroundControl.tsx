@@ -74,6 +74,15 @@ export function BackgroundControl({ background, setBackground }: BackgroundContr
     }
   };
 
+  useEffect(() => {
+    if (background.includes("gradient")) {
+      const match = background.match(/\d+deg/);
+      if (match) {
+        setGradientAngle(match[0].replace("deg", ""));
+      }
+    }
+  }, [background]);
+
   return (
     <div className="space-y-4 dark">
       <div className="space-y-2">
