@@ -9,6 +9,7 @@ interface Pill {
   id: number;
   text: string;
   font: string;
+  background: string;
 }
 
 interface ControlsProps {
@@ -43,8 +44,8 @@ export function Controls({
   setActiveTemplate,
 }: ControlsProps) {
   return (
-    <Card className="p-4 sm:p-6 space-y-6 h-[calc(100vh-12rem)] overflow-y-auto">
-      <div className="space-y-6">
+    <Card className="p-6 space-y-6 h-[calc(100vh-12rem)] overflow-y-auto rounded-none border-border/50">
+      <div className="space-y-8">
         <TemplateControl
           activeTemplate={activeTemplate}
           setActiveTemplate={setActiveTemplate}

@@ -5,7 +5,7 @@ import { templates } from "@/lib/templates";
 
 export default function Index() {
   const [activeTemplate, setActiveTemplate] = useState("instagram-post");
-  const [background, setBackground] = useState("none");
+  const [background, setBackground] = useState("#f5f5f5");
   const [jobTitle, setJobTitle] = useState("Design Chief of Staff");
   const [jobTitleFont, setJobTitleFont] = useState("Playfair Display");
   const [jobTitleSize, setJobTitleSize] = useState("4xl");
@@ -15,48 +15,37 @@ export default function Index() {
   ]);
   const [logo, setLogo] = useState<string | null>(null);
 
-  // Calculate preview dimensions while maintaining aspect ratio
   const template = templates[activeTemplate];
-  const maxPreviewWidth = 600;
-  const maxPreviewHeight = 600;
-  const aspectRatio = template.width / template.height;
-  
-  let previewWidth = Math.min(maxPreviewWidth, template.width);
-  let previewHeight = previewWidth / aspectRatio;
-  
-  if (previewHeight > maxPreviewHeight) {
-    previewHeight = maxPreviewHeight;
-    previewWidth = previewHeight * aspectRatio;
-  }
 
   return (
-    <div className="min-h-screen p-4 sm:p-6 bg-gradient-to-b from-slate-50 to-white">
-      <div className="max-w-[1400px] mx-auto space-y-6 animate-fade-in">
-        <header className="text-center space-y-3">
-          <h1 className="text-3xl sm:text-4xl font-playfair font-semibold text-slate-800">
+    <div className="min-h-screen p-4 sm:p-6 bg-background">
+      <div className="max-w-[1400px] mx-auto space-y-12 animate-fade-in">
+        <header className="text-center space-y-4">
+          <h1 className="text-4xl sm:text-5xl font-playfair font-medium tracking-tight text-foreground">
             Job Post Image Generator
           </h1>
-          <p className="text-sm sm:text-base text-slate-600 max-w-2xl mx-auto">
+          <p className="text-sm sm:text-base text-muted-foreground max-w-2xl mx-auto">
             Create beautiful job posting images for social media in seconds. Choose your template,
             customize your design, and export your image.
           </p>
         </header>
 
-        <div className="grid lg:grid-cols-[1fr,380px] gap-6">
+        <div className="grid lg:grid-cols-[1fr,380px] gap-12">
           <div className="relative">
             <div className="sticky top-6">
               <div className="h-[600px] flex items-center justify-center">
                 <div 
-                  className="bg-white/50 backdrop-blur-sm rounded-lg border border-slate-200/50 shadow-sm transition-all duration-300"
+                  className="bg-card/50 backdrop-blur-sm rounded-none border border-border/50 transition-all duration-300"
                   style={{
-                    width: `${previewWidth}px`,
-                    height: `${previewHeight}px`,
-                    margin: '0 auto'
+                    width: `${template.width}px`,
+                    height: `${template.height}px`,
+                    maxWidth: '100%',
+                    maxHeight: '70vh',
                   }}
                 >
                   <ImageEditor
                     template={template}
-                    background={background === "none" ? "#ffffff" : background}
+                    background={background}
                     jobTitle={jobTitle}
                     jobTitleFont={jobTitleFont}
                     jobTitleSize={jobTitleSize}
