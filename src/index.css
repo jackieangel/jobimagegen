@@ -13,50 +13,11 @@
 
 @layer base {
   :root {
-    /* Light theme colors */
-    --background: 0 0% 100%;
-    --foreground: 240 10% 3.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 240 10% 3.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 240 10% 3.9%;
-    --primary: 240 5.9% 10%;
-    --primary-foreground: 0 0% 98%;
-    --secondary: 240 4.8% 95.9%;
-    --secondary-foreground: 240 5.9% 10%;
-    --muted: 240 4.8% 95.9%;
-    --muted-foreground: 240 3.8% 46.1%;
-    --accent: 240 4.8% 95.9%;
-    --accent-foreground: 240 5.9% 10%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 240 5.9% 90%;
-    --input: 240 5.9% 90%;
-    --ring: 240 5.9% 10%;
-    --radius: 0.5rem;
+    /* ... keep existing code (color variables) */
   }
 
   .dark {
-    /* Dark theme colors with improved contrast */
-    --background: 0 0% 12%;
-    --foreground: 0 0% 98%;
-    --card: 0 0% 15%;
-    --card-foreground: 0 0% 98%;
-    --popover: 0 0% 15%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 0 0% 98%;
-    --primary-foreground: 0 0% 12%;
-    --secondary: 0 0% 18%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 0 0% 18%;
-    --muted-foreground: 0 0% 65%;
-    --accent: 0 0% 18%;
-    --accent-foreground: 0 0% 98%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 20%;
-    --input: 0 0% 20%;
-    --ring: 0 0% 98%;
+    /* ... keep existing code (dark theme colors) */
   }
  
   * {
@@ -81,17 +42,36 @@
   @keyframes gradientMotion {
     0% {
       background-position: 0% 50%;
+      background-image: var(--gradient-start);
     }
     50% {
       background-position: 100% 50%;
+      background-image: var(--gradient-modified);
     }
     100% {
       background-position: 0% 50%;
+      background-image: var(--gradient-start);
     }
   }
 
   .gradient-motion {
-    animation: gradientMotion 180s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    animation: gradientMotion 15s cubic-bezier(0.4, 0, 0.2, 1) infinite;
     background-size: 200% 200%;
+  }
+
+  .gradient-motion[data-theme="light"] {
+    --gradient-start: var(--initial-gradient);
+    --gradient-modified: linear-gradient(var(--angle), 
+      color-mix(in srgb, var(--start-color) 85%, white),
+      color-mix(in srgb, var(--end-color) 85%, white)
+    );
+  }
+
+  .gradient-motion[data-theme="dark"] {
+    --gradient-start: var(--initial-gradient);
+    --gradient-modified: linear-gradient(var(--angle), 
+      color-mix(in srgb, var(--start-color) 85%, black),
+      color-mix(in srgb, var(--end-color) 85%, black)
+    );
   }
 }

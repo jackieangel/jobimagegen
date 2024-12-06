@@ -1,4 +1,4 @@
-import { forwardRef } from "react";
+import { forwardRef, useEffect } from "react";
 import { cn } from "@/lib/utils";
 
 interface ImageEditorProps {
@@ -39,6 +39,20 @@ export const ImageEditor = forwardRef<HTMLDivElement, ImageEditorProps>(
         background.includes("hsl(25, 50%, 20%)") || // Cedar
         background.includes("hsl(250, 25%, 10%)") // Nightshade
       );
+
+    useEffect(() => {
+      const editorElement = document.querySelector('[data-gradient-motion]');
+      if (editorElement && background.includes('linear-gradient')) {
+        const angle = background.match(/\d+deg/)?.[0] || '90deg';
+        const colors = background.match(/hsla?\([^)]+\)|#[A-Fa-f0-9]{6}|#[A-Fa-f0-9]{3}/g) || [];
+        
+        editorElement.style.setProperty('--initial-gradient', background);
+        editorElement.style.setProperty('--angle', angle);
+        editorElement.style.setProperty('--start-color', colors[0] || '#ffffff');
+        editorElement.style.setProperty('--end-color', colors[1] || '#ffffff');
+        editorElement.setAttribute('data-theme', isDarkTheme ? 'dark' : 'light');
+      }
+    }, [background, isDarkTheme]);
 
     const getTextColor = (bgColor: string) => {
       if (
