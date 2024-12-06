@@ -1,7 +1,4 @@
 import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ImageEditor } from "@/components/ImageEditor";
 import { Controls } from "@/components/Controls";
 import { templates } from "@/lib/templates";
@@ -19,7 +16,7 @@ export default function Index() {
   const [logo, setLogo] = useState<string | null>(null);
 
   return (
-    <div className="min-h-screen p-4 sm:p-6 bg-gradient-to-b from-blue-50 to-white">
+    <div className="min-h-screen p-4 sm:p-6 bg-gradient-to-b from-slate-50 to-white">
       <div className="max-w-[1400px] mx-auto space-y-6 animate-fade-in">
         <header className="text-center space-y-3">
           <h1 className="text-3xl sm:text-4xl font-playfair font-semibold text-slate-800">
@@ -32,17 +29,21 @@ export default function Index() {
         </header>
 
         <div className="grid lg:grid-cols-[1fr,380px] gap-6">
-          <Card className="p-4 sm:p-6 flex items-center justify-center bg-white/50 backdrop-blur-sm">
-            <ImageEditor
-              template={templates[activeTemplate]}
-              background={background === "none" ? "#ffffff" : background}
-              jobTitle={jobTitle}
-              jobTitleFont={jobTitleFont}
-              jobTitleSize={jobTitleSize}
-              pills={pills}
-              logo={logo}
-            />
-          </Card>
+          <div className="relative">
+            <div className="sticky top-6">
+              <div className="p-4 sm:p-6 flex items-center justify-center bg-white/50 backdrop-blur-sm rounded-lg border border-slate-200/50 shadow-sm transition-all duration-300">
+                <ImageEditor
+                  template={templates[activeTemplate]}
+                  background={background === "none" ? "#ffffff" : background}
+                  jobTitle={jobTitle}
+                  jobTitleFont={jobTitleFont}
+                  jobTitleSize={jobTitleSize}
+                  pills={pills}
+                  logo={logo}
+                />
+              </div>
+            </div>
+          </div>
 
           <Controls
             background={background}
