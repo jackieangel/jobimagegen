@@ -13,11 +13,43 @@
 
 @layer base {
   :root {
-    /* ... keep existing code (color variables) */
+    --background: #ffffff;
+    --foreground: #000000;
+    --border: #eaeaea;
+    --card: #f9f9f9;
+    --accent: #f0f0f0;
+    --muted: #f7f7f7;
+    --primary: #646cff;
+    --secondary: #f0f0f0;
+    --danger: #ff4d4f;
+    --success: #52c41a;
+    --warning: #faad14;
+    --info: #1890ff;
+    --gradient-start: #e3e6e3;
+    --gradient-modified: #cbd5cd;
+    --angle: 90deg;
+    --start-color: #e3e6e3;
+    --end-color: #cbd5cd;
   }
 
   .dark {
-    /* ... keep existing code (dark theme colors) */
+    --background: #1a1a1a;
+    --foreground: #ffffff;
+    --border: #333333;
+    --card: #2a2a2a;
+    --accent: #3a3a3a;
+    --muted: #4a4a4a;
+    --primary: #646cff;
+    --secondary: #f0f0f0;
+    --danger: #ff4d4f;
+    --success: #52c41a;
+    --warning: #faad14;
+    --info: #1890ff;
+    --gradient-start: #1a1a1a;
+    --gradient-modified: #333333;
+    --angle: 90deg;
+    --start-color: #1a1a1a;
+    --end-color: #333333;
   }
  
   * {

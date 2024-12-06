@@ -40,20 +40,6 @@ export const ImageEditor = forwardRef<HTMLDivElement, ImageEditorProps>(
         background.includes("hsl(250, 25%, 10%)") // Nightshade
       );
 
-    useEffect(() => {
-      const editorElement = document.querySelector('[data-preview-gradient]') as HTMLElement;
-      if (editorElement && background.includes('linear-gradient')) {
-        const angle = background.match(/\d+deg/)?.[0] || '90deg';
-        const colors = background.match(/hsla?\([^)]+\)|#[A-Fa-f0-9]{6}|#[A-Fa-f0-9]{3}/g) || [];
-        
-        editorElement.style.setProperty('--initial-gradient', background);
-        editorElement.style.setProperty('--angle', angle);
-        editorElement.style.setProperty('--start-color', colors[0] || '#ffffff');
-        editorElement.style.setProperty('--end-color', colors[1] || '#ffffff');
-        editorElement.setAttribute('data-theme', isDarkTheme ? 'dark' : 'light');
-      }
-    }, [background, isDarkTheme]);
-
     const getTextColor = (bgColor: string) => {
       if (
         bgColor.includes("rgba(30, 58, 138, 0.9)") || // Dark blue
@@ -67,10 +53,8 @@ export const ImageEditor = forwardRef<HTMLDivElement, ImageEditorProps>(
     return (
       <div
         ref={ref}
-        data-preview-gradient
         className={cn(
           "w-full h-full relative",
-          background.includes('linear-gradient') && "preview-gradient-motion",
           isDarkTheme && "dark"
         )}
         style={{
