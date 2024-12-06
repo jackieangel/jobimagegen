@@ -20,20 +20,20 @@ export default function Index() {
 
   return (
     <div className="min-h-[1000px] max-h-[1000px] max-w-[1000px] mx-auto bg-background overflow-hidden">
-      <div className="container h-full px-4 py-6 md:py-8">
-        <header className="text-center space-y-3 mb-6 md:mb-8">
-          <h1 className="text-2xl md:text-4xl font-playfair font-medium tracking-tight text-foreground">
+      <div className="container h-full px-2 sm:px-4 py-4 sm:py-6 md:py-8">
+        <header className="text-center space-y-2 sm:space-y-3 mb-4 sm:mb-6 md:mb-8">
+          <h1 className="text-xl sm:text-2xl md:text-4xl font-playfair font-medium tracking-tight text-foreground">
             Job Post Image Generator
           </h1>
-          <p className="text-xs md:text-sm text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-xs sm:text-sm text-muted-foreground max-w-2xl mx-auto px-2">
             Create beautiful job posting images for social media in seconds. Choose your template,
             customize your design, and export your image.
           </p>
         </header>
 
-        <div className="grid lg:grid-cols-[320px,1fr] gap-4 md:gap-8 h-[calc(100%-120px)]">
-          <div className="h-full">
-            <ScrollArea className="h-full pr-4">
+        <div className="grid md:grid-cols-[280px,1fr] lg:grid-cols-[320px,1fr] gap-4 md:gap-6 lg:gap-8 h-[calc(100%-100px)] sm:h-[calc(100%-120px)]">
+          <div className="h-[300px] md:h-full">
+            <ScrollArea className="h-full pr-2 sm:pr-4">
               <Controls
                 background={background}
                 setBackground={setBackground}
@@ -54,9 +54,7 @@ export default function Index() {
 
           <div>
             <div className="sticky top-6 h-full">
-              {/* Outer wrapper with fixed dimensions and background */}
-              <div className="w-full h-full bg-slate-50 flex items-center justify-center p-6">
-                {/* Inner wrapper that adapts to template size */}
+              <div className="w-full h-full bg-slate-50 flex items-center justify-center p-3 sm:p-4 md:p-6 rounded-lg">
                 <div 
                   className="relative transition-all duration-300 bg-white shadow-sm"
                   style={{
