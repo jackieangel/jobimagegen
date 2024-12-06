@@ -5,6 +5,7 @@ import { toPng } from "html-to-image";
 import { Download } from "lucide-react";
 import { toast } from "sonner";
 import type { Template } from "@/lib/templates";
+import { Card } from "@/components/ui/card";
 
 interface Pill {
   id: number;
@@ -63,7 +64,7 @@ export function ImageEditor({
 
   return (
     <div className="space-y-4 w-full">
-      <div
+      <Card
         ref={editorRef}
         className="relative mx-auto overflow-hidden bg-gradient-to-b from-white/80 to-transparent transition-all duration-300"
         style={{
@@ -111,7 +112,7 @@ export function ImageEditor({
             </div>
           </Draggable>
         </div>
-      </div>
+      </Card>
 
       <Button
         onClick={handleExport}

@@ -4,6 +4,7 @@ import { TemplateControl } from "./controls/TemplateControl";
 import { JobTitleControl } from "./controls/JobTitleControl";
 import { TagsControl } from "./controls/TagsControl";
 import { LogoControl } from "./controls/LogoControl";
+import { Separator } from "@/components/ui/separator";
 
 interface Pill {
   id: number;
@@ -50,11 +51,15 @@ export function Controls({
           activeTemplate={activeTemplate}
           setActiveTemplate={setActiveTemplate}
         />
+        
+        <Separator />
 
         <BackgroundControl
           background={background}
           setBackground={setBackground}
         />
+        
+        <Separator />
 
         <JobTitleControl
           jobTitle={jobTitle}
@@ -64,11 +69,15 @@ export function Controls({
           jobTitleSize={jobTitleSize}
           setJobTitleSize={setJobTitleSize}
         />
+        
+        <Separator />
 
         <TagsControl
           pills={pills}
           setPills={setPills}
         />
+        
+        <Separator />
 
         <LogoControl
           setLogo={setLogo}
