@@ -44,6 +44,14 @@ export function Controls({
   activeTemplate,
   setActiveTemplate,
 }: ControlsProps) {
+  const handleThemeChange = (isDark: boolean) => {
+    // Update all pills to use the new theme's default color
+    setPills(pills.map(pill => ({
+      ...pill,
+      background: isDark ? "rgba(255, 255, 255, 0.15)" : "rgba(243, 244, 246, 0.8)"
+    })));
+  };
+
   return (
     <Card className="p-6 space-y-6 h-[calc(100vh-12rem)] overflow-y-auto rounded-none border-border/50">
       <div className="space-y-8">
@@ -57,6 +65,7 @@ export function Controls({
         <BackgroundControl
           background={background}
           setBackground={setBackground}
+          onThemeChange={handleThemeChange}
         />
         
         <Separator />

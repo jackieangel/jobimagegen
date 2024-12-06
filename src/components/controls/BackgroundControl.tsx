@@ -7,9 +7,10 @@ import { SolidColorControls } from "./background/SolidColorControls";
 interface BackgroundControlProps {
   background: string;
   setBackground: (value: string) => void;
+  onThemeChange?: (isDark: boolean) => void;
 }
 
-export function BackgroundControl({ background, setBackground }: BackgroundControlProps) {
+export function BackgroundControl({ background, setBackground, onThemeChange }: BackgroundControlProps) {
   const [gradientAngle, setGradientAngle] = useState("90");
   const [gradientMotion, setGradientMotion] = useState(false);
   
@@ -41,6 +42,18 @@ export function BackgroundControl({ background, setBackground }: BackgroundContr
     }
   };
 
+  const handleBackgroundChange = (value: string) => {
+    setBackground(value);
+    const isDarkTheme = 
+      value.includes("Cedar") || 
+      value.includes("Nightshade") ||
+      value.toLowerCase().includes("linear-gradient") && (
+        value.includes("hsl(25, 50%, 20%)") || // Cedar
+        value.includes("hsl(250, 25%, 10%)") // Nightshade
+      );
+    onThemeChange?.(isDarkTheme);
+  };
+
   useEffect(() => {
     if (background.includes("gradient")) {
       const match = background.match(/\d+deg/);
@@ -57,7 +70,7 @@ export function BackgroundControl({ background, setBackground }: BackgroundContr
         <div className="flex gap-2">
           <Select 
             value={background}
-            onValueChange={setBackground}
+            onValueChange={handleBackgroundChange}
           >
             <SelectTrigger className="flex-1">
               <SelectValue placeholder="Select a background color..." />

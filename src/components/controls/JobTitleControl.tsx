@@ -1,5 +1,5 @@
-import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 interface JobTitleControlProps {
@@ -10,14 +10,6 @@ interface JobTitleControlProps {
   jobTitleSize: string;
   setJobTitleSize: (value: string) => void;
 }
-
-const fontOptions = ["Playfair Display", "Inter", "Arial", "Georgia", "Times New Roman"];
-const sizeOptions = [
-  { label: "Small", value: "sm" },
-  { label: "Large", value: "base" },
-  { label: "Extra Large", value: "lg" },
-  { label: "Extra Extra Large", value: "xl" }
-];
 
 export function JobTitleControl({
   jobTitle,
@@ -30,46 +22,41 @@ export function JobTitleControl({
   return (
     <div className="space-y-4">
       <div className="space-y-2">
-        <Label>Title</Label>
+        <Label>Job Title</Label>
         <Input
           value={jobTitle}
           onChange={(e) => setJobTitle(e.target.value)}
-          placeholder="Enter job title"
+          placeholder="Enter job title..."
         />
       </div>
 
-      <div className="grid grid-cols-2 gap-4">
-        <div className="space-y-2">
-          <Label>Font</Label>
-          <Select value={jobTitleFont} onValueChange={setJobTitleFont}>
-            <SelectTrigger>
-              <SelectValue placeholder="Select font" />
-            </SelectTrigger>
-            <SelectContent>
-              {fontOptions.map(font => (
-                <SelectItem key={font} value={font}>
-                  {font}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        </div>
+      <div className="space-y-2">
+        <Label>Font Style</Label>
+        <Select value={jobTitleFont} onValueChange={setJobTitleFont}>
+          <SelectTrigger>
+            <SelectValue placeholder="Select font style..." />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="Playfair Display">Playfair Display</SelectItem>
+            <SelectItem value="Archivo">Archivo</SelectItem>
+            <SelectItem value="Inter">Inter</SelectItem>
+          </SelectContent>
+        </Select>
+      </div>
 
-        <div className="space-y-2">
-          <Label>Size</Label>
-          <Select value={jobTitleSize} onValueChange={setJobTitleSize}>
-            <SelectTrigger>
-              <SelectValue placeholder="Select size" />
-            </SelectTrigger>
-            <SelectContent>
-              {sizeOptions.map(size => (
-                <SelectItem key={size.value} value={size.value}>
-                  {size.label}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        </div>
+      <div className="space-y-2">
+        <Label>Font Size</Label>
+        <Select value={jobTitleSize} onValueChange={setJobTitleSize}>
+          <SelectTrigger>
+            <SelectValue placeholder="Select font size..." />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="sm">Small</SelectItem>
+            <SelectItem value="base">Medium</SelectItem>
+            <SelectItem value="lg">Large</SelectItem>
+            <SelectItem value="xl">Extra Large</SelectItem>
+          </SelectContent>
+        </Select>
       </div>
     </div>
   );
