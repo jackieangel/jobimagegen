@@ -15,8 +15,7 @@ const fontOptions = ["Playfair Display", "Inter", "Arial", "Georgia", "Times New
 const sizeOptions = [
   { label: "Small", value: "3xl" },
   { label: "Medium", value: "4xl" },
-  { label: "Large", value: "5xl" },
-  { label: "Extra Large", value: "6xl" }
+  { label: "Large", value: "5xl" }
 ];
 
 export function JobTitleControl({

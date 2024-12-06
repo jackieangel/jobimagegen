@@ -13,24 +13,24 @@
 
 @layer base {
   :root {
-    --background: 0 0% 12%;
+    --background: 250 25% 10%;
     --foreground: 0 0% 98%;
-    --card: 0 0% 15%;
+    --card: 250 25% 13%;
     --card-foreground: 0 0% 98%;
-    --popover: 0 0% 15%;
+    --popover: 250 25% 13%;
     --popover-foreground: 0 0% 98%;
     --primary: 0 0% 98%;
-    --primary-foreground: 0 0% 12%;
-    --secondary: 0 0% 18%;
+    --primary-foreground: 250 25% 10%;
+    --secondary: 250 25% 16%;
     --secondary-foreground: 0 0% 98%;
-    --muted: 0 0% 18%;
+    --muted: 250 25% 16%;
     --muted-foreground: 0 0% 65%;
-    --accent: 0 0% 18%;
+    --accent: 250 25% 16%;
     --accent-foreground: 0 0% 98%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 20%;
-    --input: 0 0% 20%;
+    --border: 250 25% 18%;
+    --input: 250 25% 18%;
     --ring: 0 0% 98%;
     --radius: 0.5rem;
   }
@@ -40,7 +40,7 @@
   }
 
   body {
-    @apply bg-background text-foreground font-inter antialiased;
+    @apply bg-background text-foreground font-inter antialiased min-h-screen;
   }
 
   input, select, textarea {

@@ -71,12 +71,11 @@ export const ImageEditor = forwardRef<HTMLDivElement, ImageEditorProps>(({
         <Draggable bounds="parent">
           <div className="cursor-move space-y-6">
             <h1 
-              className={`text-${jobTitleSize} font-medium text-slate-800 leading-tight`}
+              className="text-white font-medium leading-tight tracking-tight"
               style={{ 
                 fontFamily: jobTitleFont,
                 fontSize: jobTitleSize === '3xl' ? '1.875rem' : 
-                         jobTitleSize === '4xl' ? '2.25rem' : 
-                         jobTitleSize === '5xl' ? '3rem' : '3.75rem'
+                         jobTitleSize === '4xl' ? '2.25rem' : '3rem'
               }}
             >
               {jobTitle}
@@ -86,10 +85,10 @@ export const ImageEditor = forwardRef<HTMLDivElement, ImageEditorProps>(({
               {pills.map((pill) => (
                 <span
                   key={pill.id}
-                  className="px-4 py-1.5 rounded-full backdrop-blur-sm text-sm font-medium text-slate-700"
+                  className="px-4 py-1.5 rounded-full backdrop-blur-sm text-sm font-medium text-white/90"
                   style={{ 
                     fontFamily: pill.font,
-                    backgroundColor: pill.background
+                    backgroundColor: 'rgba(255, 255, 255, 0.1)'
                   }}
                 >
                   {pill.text}
