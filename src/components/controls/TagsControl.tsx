@@ -74,6 +74,11 @@ export function TagsControl({ pills, setPills, background }: TagsControlProps) {
     ));
   };
 
+  const getColorLabel = (value: string) => {
+    const colors = isDarkTheme ? darkThemeColors : lightThemeColors;
+    return colors.find(color => color.value === value)?.label || value;
+  };
+
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between">
@@ -124,7 +129,9 @@ export function TagsControl({ pills, setPills, background }: TagsControlProps) {
                 onValueChange={(bg) => updatePillBackground(pill.id, bg)}
               >
                 <SelectTrigger>
-                  <SelectValue placeholder="Background" />
+                  <SelectValue placeholder="Background">
+                    {getColorLabel(pill.background)}
+                  </SelectValue>
                 </SelectTrigger>
                 <SelectContent>
                   {(isDarkTheme ? darkThemeColors : lightThemeColors).map(bg => (
