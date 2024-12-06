@@ -61,9 +61,8 @@ export default function Index() {
                   Template Aspect Ratio: {aspectRatio}
                 </p>
                 <div 
-                  className="relative w-full transition-all duration-300 bg-card shadow-sm"
+                  className="relative w-full max-w-[600px] transition-all duration-300 bg-card shadow-sm mx-auto"
                   style={{
-                    maxWidth: '100%',
                     aspectRatio: template.width / template.height,
                   }}
                 >
