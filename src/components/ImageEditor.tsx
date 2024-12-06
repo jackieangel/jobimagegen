@@ -119,7 +119,7 @@ export const ImageEditor = forwardRef<HTMLDivElement, ImageEditorProps>(
           )}
           
           <div 
-            className="absolute transition-all duration-200"
+            className="absolute transition-all duration-200 flex flex-col items-center gap-3"
             style={{
               left: '50%',
               top: '50%',
@@ -147,28 +147,18 @@ export const ImageEditor = forwardRef<HTMLDivElement, ImageEditorProps>(
             >
               {jobTitle}
             </h1>
-          </div>
 
-          <div 
-            className="absolute transition-all duration-200"
-            style={{
-              left: '50%',
-              top: '65%',
-              transform: 'translate(-50%, -50%)',
-              width: '100%',
-              padding: '0 2rem'
-            }}
-          >
             <div className="flex flex-wrap gap-2 justify-center">
               {pills.map((pill) => (
                 <div
                   key={pill.id}
                   className={cn(
-                    "px-4 py-1.5 rounded-full text-sm transition-colors duration-200 hover:bg-opacity-90 font-inter"
+                    "px-3 py-1 rounded-full text-xs transition-colors duration-200 hover:bg-opacity-90 font-inter"
                   )}
                   style={{
                     background: pill.background,
-                    color: getTextColor(pill.background)
+                    color: getTextColor(pill.background),
+                    opacity: 0.9
                   }}
                 >
                   {pill.text}

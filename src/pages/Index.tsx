@@ -90,7 +90,7 @@ export default function Index() {
                           jobTitleSize={jobTitleSize}
                           jobPosition={{ x: 50, y: 50 }}
                           pills={pills}
-                          pillsPosition={{ x: 50, y: 55 }}
+                          pillsPosition={{ x: 50, y: 50 }}
                           logo={logo}
                           logoPosition={logoPosition}
                           logoColor={logoColor}
