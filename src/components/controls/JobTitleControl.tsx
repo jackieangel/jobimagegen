@@ -13,9 +13,10 @@ interface JobTitleControlProps {
 
 const fontOptions = ["Playfair Display", "Inter", "Arial", "Georgia", "Times New Roman"];
 const sizeOptions = [
-  { label: "Small", value: "3xl" },
-  { label: "Medium", value: "4xl" },
-  { label: "Large", value: "5xl" }
+  { label: "Small", value: "sm" },
+  { label: "Base", value: "base" },
+  { label: "Large", value: "lg" },
+  { label: "Extra Large", value: "xl" }
 ];
 
 export function JobTitleControl({
