@@ -5,7 +5,6 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Plus, X } from "lucide-react";
 import { toast } from "sonner";
 import { Card } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 
 interface Pill {
   id: number;
@@ -126,20 +125,6 @@ export function TagsControl({ pills, setPills }: TagsControlProps) {
                   ))}
                 </SelectContent>
               </Select>
-            </div>
-
-            <div className="pt-2">
-              <Label className="text-sm text-muted-foreground mb-2 block">Preview:</Label>
-              <Badge
-                className="px-4 py-1.5 rounded-full"
-                style={{ 
-                  fontFamily: pill.font,
-                  backgroundColor: pill.background,
-                  color: 'rgb(51, 65, 85)'
-                }}
-              >
-                {pill.text || 'Tag Preview'}
-              </Badge>
             </div>
           </Card>
         ))}

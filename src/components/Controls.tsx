@@ -61,6 +61,12 @@ export function Controls({
         
         <Separator />
 
+        <LogoControl
+          setLogo={setLogo}
+        />
+        
+        <Separator />
+
         <JobTitleControl
           jobTitle={jobTitle}
           setJobTitle={setJobTitle}
@@ -75,12 +81,6 @@ export function Controls({
         <TagsControl
           pills={pills}
           setPills={setPills}
-        />
-        
-        <Separator />
-
-        <LogoControl
-          setLogo={setLogo}
         />
       </div>
     </Card>
