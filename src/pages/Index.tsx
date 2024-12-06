@@ -24,14 +24,10 @@ export default function Index() {
   return (
     <Card className="min-h-[1000px] max-h-[1000px] max-w-[1400px] mx-auto bg-card dark">
       <div className="container h-full px-2 sm:px-4 py-4 sm:py-6 md:py-8">
-        <header className="text-center space-y-2 sm:space-y-3 mb-4 sm:mb-6 md:mb-8">
+        <header className="text-center mb-4 sm:mb-6 md:mb-8">
           <h1 className="text-xl sm:text-2xl md:text-4xl font-archivo font-medium tracking-tight">
-            Job Post Image Generator
+            Generate a Job Post
           </h1>
-          <p className="text-xs sm:text-sm text-muted-foreground max-w-2xl mx-auto px-2">
-            Create beautiful job posting images for social media in seconds. Choose your template,
-            customize your design, and export your image.
-          </p>
         </header>
 
         <div className="grid md:grid-cols-[320px,1fr] lg:grid-cols-[380px,1fr] gap-4 md:gap-6 lg:gap-8 h-[calc(100%-100px)] sm:h-[calc(100%-120px)]">
@@ -60,7 +56,7 @@ export default function Index() {
               <div className="sticky top-0">
                 <div className="w-full flex flex-col items-center justify-center gap-4">
                   <p className="text-sm text-muted-foreground">
-                    Template Aspect Ratio: {template.width}:{template.height}
+                    {template.width}:{template.height}
                   </p>
                   <div className="w-full flex items-center justify-center">
                     <div className="relative w-[600px] h-[600px] bg-card shadow-sm flex items-center justify-center">

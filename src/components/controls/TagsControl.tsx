@@ -61,7 +61,12 @@ export function TagsControl({ pills, setPills }: TagsControlProps) {
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between">
-        <Label>Tags ({pills.length}/4)</Label>
+        <Label className="flex items-center gap-2">
+          Tags
+          <span className="inline-flex items-center justify-center w-5 h-5 text-xs font-medium bg-primary/10 text-primary rounded">
+            {pills.length}/4
+          </span>
+        </Label>
         <Button
           type="button"
           variant="outline"

@@ -30,45 +30,46 @@ export function JobTitleControl({
   return (
     <div className="space-y-4">
       <div className="space-y-2">
-        <Label htmlFor="jobTitle">Job Title</Label>
+        <Label>Title</Label>
         <Input
-          id="jobTitle"
           value={jobTitle}
           onChange={(e) => setJobTitle(e.target.value)}
           placeholder="Enter job title"
         />
       </div>
 
-      <div className="space-y-2">
-        <Label>Job Title Font</Label>
-        <Select value={jobTitleFont} onValueChange={setJobTitleFont}>
-          <SelectTrigger>
-            <SelectValue placeholder="Select font" />
-          </SelectTrigger>
-          <SelectContent>
-            {fontOptions.map(font => (
-              <SelectItem key={font} value={font}>
-                {font}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
-      </div>
+      <div className="grid grid-cols-2 gap-4">
+        <div className="space-y-2">
+          <Label>Font</Label>
+          <Select value={jobTitleFont} onValueChange={setJobTitleFont}>
+            <SelectTrigger>
+              <SelectValue placeholder="Select font" />
+            </SelectTrigger>
+            <SelectContent>
+              {fontOptions.map(font => (
+                <SelectItem key={font} value={font}>
+                  {font}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </div>
 
-      <div className="space-y-2">
-        <Label>Job Title Size</Label>
-        <Select value={jobTitleSize} onValueChange={setJobTitleSize}>
-          <SelectTrigger>
-            <SelectValue placeholder="Select size" />
-          </SelectTrigger>
-          <SelectContent>
-            {sizeOptions.map(size => (
-              <SelectItem key={size.value} value={size.value}>
-                {size.label}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
+        <div className="space-y-2">
+          <Label>Size</Label>
+          <Select value={jobTitleSize} onValueChange={setJobTitleSize}>
+            <SelectTrigger>
+              <SelectValue placeholder="Select size" />
+            </SelectTrigger>
+            <SelectContent>
+              {sizeOptions.map(size => (
+                <SelectItem key={size.value} value={size.value}>
+                  {size.label}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </div>
       </div>
     </div>
   );
