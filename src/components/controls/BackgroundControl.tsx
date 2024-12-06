@@ -72,39 +72,37 @@ export function BackgroundControl({ background, setBackground, onThemeChange }: 
         </Label>
       </div>
 
-      <Card className="p-4 space-y-4">
-        <Select 
-          value={background}
-          onValueChange={handleBackgroundChange}
-        >
-          <SelectTrigger>
-            <SelectValue placeholder="Select a background style..." />
-          </SelectTrigger>
-          <SelectContent>
-            {gradients.map((gradient) => (
-              <SelectItem key={gradient.name} value={gradient.value}>
-                {gradient.name}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
+      <Select 
+        value={background}
+        onValueChange={handleBackgroundChange}
+      >
+        <SelectTrigger>
+          <SelectValue placeholder="Select a background style..." />
+        </SelectTrigger>
+        <SelectContent>
+          {gradients.map((gradient) => (
+            <SelectItem key={gradient.name} value={gradient.value}>
+              {gradient.name}
+            </SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
 
-        {background.includes("gradient") ? (
-          <GradientControls
-            background={background}
-            setBackground={setBackground}
-            gradientAngle={gradientAngle}
-            setGradientAngle={setGradientAngle}
-            gradientMotion={gradientMotion}
-            setGradientMotion={setGradientMotion}
-          />
-        ) : (
-          <SolidColorControls
-            background={background}
-            handleColorChange={handleColorChange}
-          />
-        )}
-      </Card>
+      {background.includes("gradient") ? (
+        <GradientControls
+          background={background}
+          setBackground={setBackground}
+          gradientAngle={gradientAngle}
+          setGradientAngle={setGradientAngle}
+          gradientMotion={gradientMotion}
+          setGradientMotion={setGradientMotion}
+        />
+      ) : (
+        <SolidColorControls
+          background={background}
+          handleColorChange={handleColorChange}
+        />
+      )}
     </div>
   );
 }
