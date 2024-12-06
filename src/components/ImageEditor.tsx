@@ -40,6 +40,18 @@ export const ImageEditor = forwardRef<HTMLDivElement, ImageEditorProps>(
         background.includes("hsl(250, 25%, 10%)") // Nightshade
       );
 
+    const getTextColor = (bgColor: string) => {
+      // For dark blue and dark purple backgrounds, always use white text
+      if (
+        bgColor.includes("rgba(30, 58, 138, 0.9)") || // Dark blue
+        bgColor.includes("rgba(88, 28, 135, 0.9)") // Dark purple
+      ) {
+        return "hsl(0 0% 98%)";
+      }
+      // For other backgrounds, use the theme-based text color
+      return isDarkTheme ? "hsl(0 0% 98%)" : "hsl(240 5.9% 10%)";
+    };
+
     return (
       <div
         ref={ref}
@@ -83,7 +95,7 @@ export const ImageEditor = forwardRef<HTMLDivElement, ImageEditorProps>(
                 )}
                 style={{
                   background: pill.background,
-                  color: isDarkTheme ? 'hsl(0 0% 98%)' : 'hsl(240 5.9% 10%)'
+                  color: getTextColor(pill.background)
                 }}
               >
                 {pill.text}

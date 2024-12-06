@@ -16,7 +16,7 @@ interface Pill {
 interface TagsControlProps {
   pills: Pill[];
   setPills: (pills: Pill[]) => void;
-  background: string; // Add background prop
+  background: string;
 }
 
 const lightThemeColors = [
@@ -29,8 +29,8 @@ const lightThemeColors = [
 
 const darkThemeColors = [
   { label: "Dark Gray", value: "rgba(255, 255, 255, 0.15)" },
-  { label: "Dark Blue", value: "rgba(255, 255, 255, 0.2)" },
-  { label: "Dark Purple", value: "rgba(255, 255, 255, 0.25)" },
+  { label: "Dark Blue", value: "rgba(30, 58, 138, 0.9)" }, // Updated dark blue
+  { label: "Dark Purple", value: "rgba(88, 28, 135, 0.9)" }, // Updated dark purple
 ];
 
 const defaultLightThemeColor = "rgba(243, 244, 246, 0.8)"; // Light Gray
