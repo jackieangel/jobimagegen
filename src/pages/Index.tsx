@@ -12,8 +12,8 @@ export default function Index() {
   const [jobTitle, setJobTitle] = useState("Design Chief of Staff");
   const [jobTitleFont, setJobTitleFont] = useState("Playfair Display");
   const [jobTitleSize, setJobTitleSize] = useState("base");
-  const [jobPosition, setJobPosition] = useState({ x: 50, y: 50 });
-  const [pillsPosition, setPillsPosition] = useState({ x: 50, y: 65 });
+  const [jobPosition] = useState({ x: 50, y: 50 });
+  const [pillsPosition] = useState({ x: 50, y: 65 });
   const [pills, setPills] = useState([
     { id: 1, text: "PARIS / REMOTE", font: "Inter", background: "#f3f4f6" },
     { id: 2, text: "UX/UI DESIGN", font: "Inter", background: "#f3f4f6" },
@@ -52,14 +52,14 @@ export default function Index() {
                 jobTitleSize={jobTitleSize}
                 setJobTitleSize={setJobTitleSize}
                 jobPosition={jobPosition}
-                setJobPosition={setJobPosition}
+                setJobPosition={() => {}}
                 pills={pills}
                 setPills={setPills}
                 pillsPosition={pillsPosition}
-                setPillsPosition={setPillsPosition}
+                setPillsPosition={() => {}}
                 setLogo={setLogo}
                 logoPosition={logoPosition}
-                setLogoPosition={setLogoPosition}
+                setLogoPosition={() => {}}
                 logoColor={logoColor}
                 setLogoColor={setLogoColor}
                 logoScale={logoScale}
@@ -106,6 +106,7 @@ export default function Index() {
                           logoPosition={logoPosition}
                           logoColor={logoColor}
                           logoScale={logoScale}
+                          setLogoPosition={setLogoPosition}
                         />
                       </div>
                     </div>

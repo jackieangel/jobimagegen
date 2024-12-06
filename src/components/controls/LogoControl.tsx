@@ -8,8 +8,6 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 
 interface LogoControlProps {
   setLogo: (value: string | null) => void;
-  logoPosition: { x: number; y: number };
-  setLogoPosition: (position: { x: number; y: number }) => void;
   logoColor: string;
   setLogoColor: (color: string) => void;
   logoScale: number;
@@ -18,8 +16,6 @@ interface LogoControlProps {
 
 export function LogoControl({ 
   setLogo, 
-  logoPosition, 
-  setLogoPosition,
   logoColor,
   setLogoColor,
   logoScale,
@@ -90,6 +86,9 @@ export function LogoControl({
           onChange={handleLogoUpload}
           className="cursor-pointer"
         />
+        <p className="text-sm text-muted-foreground mt-1">
+          Drag the logo in the preview to position it
+        </p>
       </div>
 
       {fileType === 'svg' && (
@@ -117,28 +116,6 @@ export function LogoControl({
           min={0.1}
           max={2}
           step={0.1}
-        />
-      </div>
-
-      <div className="space-y-2">
-        <Label>Horizontal Position</Label>
-        <Slider
-          value={[logoPosition.x]}
-          onValueChange={([value]) => setLogoPosition({ ...logoPosition, x: value })}
-          min={0}
-          max={100}
-          step={1}
-        />
-      </div>
-
-      <div className="space-y-2">
-        <Label>Vertical Position</Label>
-        <Slider
-          value={[logoPosition.y]}
-          onValueChange={([value]) => setLogoPosition({ ...logoPosition, y: value })}
-          min={0}
-          max={100}
-          step={1}
         />
       </div>
     </Card>
