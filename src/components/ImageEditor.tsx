@@ -1,4 +1,4 @@
-import { forwardRef, useEffect } from "react";
+import { forwardRef } from "react";
 import { cn } from "@/lib/utils";
 
 interface ImageEditorProps {
@@ -53,6 +53,7 @@ export const ImageEditor = forwardRef<HTMLDivElement, ImageEditorProps>(
     return (
       <div
         ref={ref}
+        data-gradient-motion
         className={cn(
           "w-full h-full relative",
           isDarkTheme && "dark"
