@@ -38,9 +38,8 @@ export function BackgroundControl({ background, setBackground }: BackgroundContr
           <Select 
             value={background === "" ? "none" : background} 
             onValueChange={setBackground}
-            className="flex-1"
           >
-            <SelectTrigger>
+            <SelectTrigger className="flex-1">
               <SelectValue placeholder="Select a background style..." />
             </SelectTrigger>
             <SelectContent>
