@@ -99,7 +99,7 @@ export const ImageEditor = forwardRef<HTMLDivElement, ImageEditorProps>(
               bounds="parent"
             >
               <div 
-                className="absolute cursor-move transition-all duration-200"
+                className="absolute cursor-move transition-all duration-200 hover:scale-105"
                 style={{
                   transform: 'translate(-50%, -50%)',
                 }}
@@ -109,9 +109,12 @@ export const ImageEditor = forwardRef<HTMLDivElement, ImageEditorProps>(
                   alt="Company logo" 
                   className="object-contain transition-all duration-200"
                   style={{
-                    height: '48px',
+                    height: '32px', // Reduced from 48px
+                    maxWidth: '120px', // Added max-width constraint
                     filter: logo.endsWith('.svg') ? `brightness(0) saturate(100%) ${logoColor === '#FFFFFF' ? 'invert(1)' : ''}` : 'none',
-                    color: logoColor
+                    color: logoColor,
+                    willChange: 'transform', // Improves performance for transforms
+                    touchAction: 'none', // Better touch device handling
                   }}
                 />
               </div>
