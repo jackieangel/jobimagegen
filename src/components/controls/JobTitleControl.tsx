@@ -12,7 +12,12 @@ interface JobTitleControlProps {
 }
 
 const fontOptions = ["Playfair Display", "Inter", "Arial", "Georgia", "Times New Roman"];
-const sizeOptions = ["3xl", "4xl", "5xl"]; // Reduced size options
+const sizeOptions = [
+  { label: "Small", value: "3xl" },
+  { label: "Medium", value: "4xl" },
+  { label: "Large", value: "5xl" },
+  { label: "Extra Large", value: "6xl" }
+];
 
 export function JobTitleControl({
   jobTitle,
@@ -58,8 +63,8 @@ export function JobTitleControl({
           </SelectTrigger>
           <SelectContent>
             {sizeOptions.map(size => (
-              <SelectItem key={size} value={size}>
-                {size}
+              <SelectItem key={size.value} value={size.value}>
+                {size.label}
               </SelectItem>
             ))}
           </SelectContent>

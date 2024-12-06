@@ -22,7 +22,7 @@ export function BackgroundControl({ background, setBackground }: BackgroundContr
         <Label>Background Style</Label>
         <Select value={background === "" ? "none" : background} onValueChange={setBackground}>
           <SelectTrigger>
-            <SelectValue placeholder="Select background style" />
+            <SelectValue placeholder="Choose a background style..." />
           </SelectTrigger>
           <SelectContent>
             {gradients.map((gradient) => (
