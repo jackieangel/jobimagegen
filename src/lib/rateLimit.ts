@@ -8,7 +8,7 @@ interface ExportLog {
   count: number;
 }
 
-const EXPORTS_PER_WEEK = 1;
+const EXPORTS_PER_WEEK = 3; // Updated from 1 to 3
 const WEEK_IN_MS = 7 * 24 * 60 * 60 * 1000;
 
 export const checkExportLimit = async (): Promise<boolean> => {
