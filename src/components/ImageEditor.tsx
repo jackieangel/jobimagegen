@@ -68,7 +68,7 @@ export const ImageEditor = forwardRef<HTMLDivElement, ImageEditorProps>(
         case "bottom":
           return "bottom-8";
         case "above-title":
-          return "top-1/3 -translate-y-full";
+          return "top-1/2 -translate-y-[150%]";
         default:
           return "top-8";
       }
@@ -102,7 +102,15 @@ export const ImageEditor = forwardRef<HTMLDivElement, ImageEditorProps>(
                 style={{
                   height: '24px',
                   maxWidth: '90px',
-                  filter: logo.endsWith('.svg') ? `brightness(0) saturate(100%) ${logoColor === '#FFFFFF' ? 'invert(1)' : logoColor === '#F5F5F5' ? 'invert(0.97)' : ''}` : 'none',
+                  filter: logo.endsWith('.svg') ? `brightness(0) saturate(100%) ${
+                    logoColor === '#FFFFFF' 
+                      ? 'invert(1)' 
+                      : logoColor === '#F5F5F5' 
+                      ? 'invert(0.97)'
+                      : logoColor === '#000000'
+                      ? 'invert(0)'
+                      : ''
+                  }` : 'none',
                   color: logoColor,
                   userSelect: 'none',
                 }}
