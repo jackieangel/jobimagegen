@@ -68,7 +68,7 @@ export const ImageEditor = forwardRef<HTMLDivElement, ImageEditorProps>(
         case "bottom":
           return "bottom-8";
         case "above-title":
-          return "top-1/2 -translate-y-[120%]";
+          return "top-1/3 -translate-y-full";
         default:
           return "top-8";
       }
@@ -100,8 +100,8 @@ export const ImageEditor = forwardRef<HTMLDivElement, ImageEditorProps>(
                 alt="Company logo" 
                 className="object-contain transition-transform duration-200"
                 style={{
-                  height: '28px',
-                  maxWidth: '100px',
+                  height: '24px',
+                  maxWidth: '90px',
                   filter: logo.endsWith('.svg') ? `brightness(0) saturate(100%) ${logoColor === '#FFFFFF' ? 'invert(1)' : logoColor === '#F5F5F5' ? 'invert(0.97)' : ''}` : 'none',
                   color: logoColor,
                   userSelect: 'none',
@@ -111,7 +111,7 @@ export const ImageEditor = forwardRef<HTMLDivElement, ImageEditorProps>(
           )}
           
           <div 
-            className="absolute transition-all duration-200 flex flex-col items-center gap-4"
+            className="absolute transition-all duration-200 flex flex-col items-center gap-6"
             style={{
               left: '50%',
               top: '50%',

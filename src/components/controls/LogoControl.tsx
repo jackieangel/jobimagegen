@@ -108,7 +108,7 @@ export function LogoControl({
 
       {fileType === 'svg' && (
         <div className="space-y-2">
-          <Label>Logo Color</Label>
+          <Label>Color</Label>
           <Select value={logoColor} onValueChange={setLogoColor}>
             <SelectTrigger>
               <SelectValue placeholder="Select color" />
