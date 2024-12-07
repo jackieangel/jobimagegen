@@ -68,7 +68,7 @@ export const ImageEditor = forwardRef<HTMLDivElement, ImageEditorProps>(
         case "bottom":
           return "bottom-8";
         case "above-title":
-          return "top-1/2 -translate-y-[200%]";
+          return "top-1/2 -translate-y-[250%]";
         default:
           return "top-8";
       }
