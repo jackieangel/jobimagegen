@@ -17,7 +17,7 @@ export default function Index() {
     { id: 2, text: "UX/UI DESIGN", font: "Inter", background: "#f3f4f6" },
   ]);
   const [logo, setLogo] = useState<string | null>(null);
-  const [logoPosition, setLogoPosition] = useState({ x: 50, y: 25 });
+  const [logoPosition, setLogoPosition] = useState<"top" | "bottom" | "above-title">("top");
   const [logoColor, setLogoColor] = useState("#000000");
 
   const editorRef = useRef<HTMLDivElement>(null);
@@ -53,6 +53,8 @@ export default function Index() {
                 setLogo={setLogo}
                 logoColor={logoColor}
                 setLogoColor={setLogoColor}
+                logoPosition={logoPosition}
+                setLogoPosition={setLogoPosition}
                 activeTemplate={activeTemplate}
                 setActiveTemplate={setActiveTemplate}
               />
@@ -94,7 +96,6 @@ export default function Index() {
                           logo={logo}
                           logoPosition={logoPosition}
                           logoColor={logoColor}
-                          setLogoPosition={setLogoPosition}
                         />
                       </div>
                     </div>

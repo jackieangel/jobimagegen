@@ -3,18 +3,23 @@ import { Label } from "@/components/ui/label";
 import { useState } from "react";
 import { toast } from "sonner";
 import { Card } from "@/components/ui/card";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 interface LogoControlProps {
   setLogo: (value: string | null) => void;
   logoColor: string;
   setLogoColor: (color: string) => void;
+  logoPosition: "top" | "bottom" | "above-title";
+  setLogoPosition: (position: "top" | "bottom" | "above-title") => void;
 }
 
 export function LogoControl({ 
   setLogo, 
   logoColor,
   setLogoColor,
+  logoPosition,
+  setLogoPosition,
 }: LogoControlProps) {
   const [fileType, setFileType] = useState<"png" | "svg" | null>(null);
 
@@ -81,9 +86,24 @@ export function LogoControl({
           onChange={handleLogoUpload}
           className="cursor-pointer"
         />
-        <p className="text-sm text-muted-foreground mt-1">
-          Drag the logo in the preview to position it
-        </p>
+      </div>
+
+      <div className="space-y-2">
+        <Label>Logo Position</Label>
+        <RadioGroup value={logoPosition} onValueChange={(value: "top" | "bottom" | "above-title") => setLogoPosition(value)}>
+          <div className="flex items-center space-x-2">
+            <RadioGroupItem value="top" id="top" />
+            <Label htmlFor="top">Top</Label>
+          </div>
+          <div className="flex items-center space-x-2">
+            <RadioGroupItem value="bottom" id="bottom" />
+            <Label htmlFor="bottom">Bottom</Label>
+          </div>
+          <div className="flex items-center space-x-2">
+            <RadioGroupItem value="above-title" id="above-title" />
+            <Label htmlFor="above-title">Above Title</Label>
+          </div>
+        </RadioGroup>
       </div>
 
       {fileType === 'svg' && (
@@ -96,8 +116,7 @@ export function LogoControl({
             <SelectContent>
               <SelectItem value="#000000">Black</SelectItem>
               <SelectItem value="#FFFFFF">White</SelectItem>
-              <SelectItem value="#6E59A5">Purple</SelectItem>
-              <SelectItem value="#1EAEDB">Blue</SelectItem>
+              <SelectItem value="#F5F5F5">Off-white</SelectItem>
             </SelectContent>
           </Select>
         </div>

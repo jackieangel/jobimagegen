@@ -1,6 +1,5 @@
 import { forwardRef, type ForwardedRef } from "react";
 import { cn } from "@/lib/utils";
-import Draggable from "react-draggable";
 
 interface ImageEditorProps {
   template: {
@@ -20,9 +19,8 @@ interface ImageEditorProps {
   }[];
   pillsPosition: { x: number; y: number };
   logo: string | null;
-  logoPosition: { x: number; y: number };
+  logoPosition: "top" | "bottom" | "above-title";
   logoColor: string;
-  setLogoPosition?: (position: { x: number; y: number }) => void;
   gradientMotion?: boolean;
 }
 
@@ -40,7 +38,6 @@ export const ImageEditor = forwardRef<HTMLDivElement, ImageEditorProps>(
       logo,
       logoPosition,
       logoColor,
-      setLogoPosition,
       gradientMotion = false,
     } = props;
 
@@ -64,14 +61,16 @@ export const ImageEditor = forwardRef<HTMLDivElement, ImageEditorProps>(
 
     const isGradient = background.toLowerCase().includes("linear-gradient");
 
-    const handleDrag = (_: any, data: { x: number; y: number }) => {
-      if (setLogoPosition && ref && 'current' in ref && ref.current) {
-        const containerRect = ref.current.getBoundingClientRect();
-        if (containerRect) {
-          const x = (data.x / containerRect.width) * 100;
-          const y = (data.y / containerRect.height) * 100;
-          setLogoPosition({ x, y });
-        }
+    const getLogoPosition = () => {
+      switch (logoPosition) {
+        case "top":
+          return "top-8";
+        case "bottom":
+          return "bottom-8";
+        case "above-title":
+          return "top-1/2 -translate-y-[120%]";
+        default:
+          return "top-8";
       }
     };
 
@@ -90,36 +89,25 @@ export const ImageEditor = forwardRef<HTMLDivElement, ImageEditorProps>(
       >
         <div className="absolute inset-0">
           {logo && (
-            <Draggable
-              position={{
-                x: (logoPosition.x / 100) * ((ref && 'current' in ref && ref.current?.clientWidth) || 0),
-                y: (logoPosition.y / 100) * ((ref && 'current' in ref && ref.current?.clientHeight) || 0),
-              }}
-              onDrag={handleDrag}
-              bounds="parent"
+            <div 
+              className={cn(
+                "absolute left-1/2 -translate-x-1/2",
+                getLogoPosition()
+              )}
             >
-              <div 
-                className="absolute cursor-move transition-transform duration-200 hover:scale-105"
+              <img 
+                src={logo} 
+                alt="Company logo" 
+                className="object-contain transition-transform duration-200"
                 style={{
-                  transform: 'translate(-50%, -50%)',
+                  height: '28px',
+                  maxWidth: '100px',
+                  filter: logo.endsWith('.svg') ? `brightness(0) saturate(100%) ${logoColor === '#FFFFFF' ? 'invert(1)' : logoColor === '#F5F5F5' ? 'invert(0.97)' : ''}` : 'none',
+                  color: logoColor,
+                  userSelect: 'none',
                 }}
-              >
-                <img 
-                  src={logo} 
-                  alt="Company logo" 
-                  className="object-contain transition-transform duration-200"
-                  style={{
-                    height: '28px',
-                    maxWidth: '100px',
-                    filter: logo.endsWith('.svg') ? `brightness(0) saturate(100%) ${logoColor === '#FFFFFF' ? 'invert(1)' : ''}` : 'none',
-                    color: logoColor,
-                    willChange: 'transform',
-                    touchAction: 'none',
-                    userSelect: 'none',
-                  }}
-                />
-              </div>
-            </Draggable>
+              />
+            </div>
           )}
           
           <div 

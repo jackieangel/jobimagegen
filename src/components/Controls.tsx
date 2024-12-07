@@ -27,6 +27,8 @@ interface ControlsProps {
   setLogo: (value: string | null) => void;
   logoColor: string;
   setLogoColor: (color: string) => void;
+  logoPosition: "top" | "bottom" | "above-title";
+  setLogoPosition: (position: "top" | "bottom" | "above-title") => void;
   activeTemplate: string;
   setActiveTemplate: (value: string) => void;
 }
@@ -45,6 +47,8 @@ export function Controls({
   setLogo,
   logoColor,
   setLogoColor,
+  logoPosition,
+  setLogoPosition,
   activeTemplate,
   setActiveTemplate,
 }: ControlsProps) {
@@ -77,6 +81,8 @@ export function Controls({
           setLogo={setLogo}
           logoColor={logoColor}
           setLogoColor={setLogoColor}
+          logoPosition={logoPosition}
+          setLogoPosition={setLogoPosition}
         />
         
         <Separator />
